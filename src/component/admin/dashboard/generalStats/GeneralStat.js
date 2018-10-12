@@ -11,21 +11,6 @@ import { getGeneralStatistics } from '../../../../redux/admin/actions/generalSta
 
 class GeneralStat extends Component {
 
-    state = {
-        totalSent: Number,
-        totalAnswered: Number,
-        totalRate: Number,
-        totalWeek: Number,
-        monthSent: [],
-        monthAnswered: [],
-        todayRate: Number,
-        todaySatis: Number,
-        monthSatis: [],
-        weekRate: [],
-        loaded: false,
-        data: [],
-    }
-
     componentDidMount(){
         this.props.getGeneralStatistics()
     }

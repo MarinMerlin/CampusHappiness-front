@@ -82,7 +82,6 @@ class UserMain extends Component {
     }
 
     onRedirectAdmin = () => {
-        console.log("bit");
         this.setState({redirectAdmin: true});
     }
 
