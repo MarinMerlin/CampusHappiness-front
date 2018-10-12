@@ -2,8 +2,8 @@ import axios from 'axios';
 
 import { GET_SPECIFIC_SURVEY_ACTION } from "./adminTypes";
 
-const handleDateChange = ()=>(dispatch)=> {
-    const date = new Date()
+const handleDateChange = (moment)=>(dispatch)=> {
+    const date = moment._d
     let day = date.getDate();
     let month = date.getMonth() + 1;
     const year = date.getFullYear();
@@ -26,7 +26,8 @@ const handleDateChange = ()=>(dispatch)=> {
                     thematiqueList: res.data.thematiqueList,
                     loaded2: true,
                     comments: comments,
-                    loaded: loaded
+                    loaded: loaded,
+                    moment: moment
                 }
             })
         });
