@@ -10,20 +10,9 @@ import { connect } from 'react-redux';
 import { handleDateChange } from '../../../../redux/admin/actions/specificSurveyAction'
 
 class Survey extends React.Component {
-    // constructor (props) {
-    //   super(props)
-    //   this.state = {
-    //     startDate: moment(),
-    //     loaded: false,
-    //     comments: [],
-    //     thematiqueList: [],
-    //     loaded2: false,
-    //   };
-    // }
 
     componentDidMount(){
       this.props.handleDateChange(moment());
-      // this.handleDateChange(moment());
     }
    
     render() {
@@ -32,7 +21,7 @@ class Survey extends React.Component {
         <Grid item >
           <Paper style={{width:'20vw',  textAlign:'center', padding:'2vh', marginTop: '10vh'}} >
               <Typography style={{ fontFamily: 'Roboto', fontSize: '2.5em', color: '#2c3e50', fontWeight: 100, textAlign:'center'}} > Pick a date </Typography>
-              <DatePicker selected={this.props.startDate} onChange={this.handleDateChange}/>
+              <DatePicker selected={this.props.startDate} onChange={this.props.handleDateChange}/>
           </Paper>
         </Grid>
         <Grid item style={{width:'97%'}} >
