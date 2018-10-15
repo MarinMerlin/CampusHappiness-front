@@ -20,6 +20,9 @@ const initialState = {
     account: {
         connectedUser: null,
     },
+    userStat : {
+        monthSatisfaction: null,
+    },
     generalStat: {
         totalSent: 0,
         totalAnswered: 0,

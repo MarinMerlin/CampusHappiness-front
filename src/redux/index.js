@@ -7,7 +7,7 @@ import manageSurveyReducer from './admin/reducers/manageSurveyReducer';
 import userSurveyReducer from './user/reducers/userSurveyReducer';
 import manageUserReducer from './admin/reducers/manageUserReducer';
 import userAccountReducer from './user/reducers/userAccountReducer';
-
+import userStatReducer from './user/reducers/userStatReducer';
 import { initialState } from './store'
 
 const appReducer = combineReducers({
@@ -18,7 +18,8 @@ const appReducer = combineReducers({
     userMain: userMainReducer,
     userSurvey: userSurveyReducer,
     manageUser: manageUserReducer,
-    account: userAccountReducer
+    account: userAccountReducer,
+    userStat: userStatReducer,
 })
 
 const rootReducer = (state, action) => {

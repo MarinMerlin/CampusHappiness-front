@@ -160,7 +160,7 @@ export class Account extends Component {
               </Toolbar>
             </Grid>
             <Grid item>
-              <Button onClick={this.onSubmitChange}>
+              <Button className={classes.root} variant="raised" size="small" color="primary" onClick={this.onSubmitChange}>
                 Submit
               </Button>
             </Grid>
