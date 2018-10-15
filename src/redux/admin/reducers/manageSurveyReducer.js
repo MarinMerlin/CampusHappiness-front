@@ -16,7 +16,10 @@ const manageSurveyReducer = function(state = null, {type, payload}){
                 selectedSondage: payload.selectedSondage
             }
         case POST_SURVEY_ACTION:
-            return state
+            return {
+                ...state,
+                sondageList: payload.newSondageList
+            }
         default:
             return state
     }

@@ -1,4 +1,4 @@
-import { GET_USER_SURVEY, READ_URL_TOKEN, SHOW_ERROR, GET_MAIL_INTENSITY, RADIO_BUTTON, COMMENT, SET_ALREADY_ANSWERED } from '../actions/userTypes'
+import { GET_USER_SURVEY, CHECK_SURVEY_TOKEN, SHOW_ERROR, GET_MAIL_INTENSITY, RADIO_BUTTON, COMMENT, SET_ALREADY_ANSWERED } from '../actions/userTypes'
 
 const userSurveyReducer = function(state = null, {type, payload}) {
     switch (type) {
@@ -13,7 +13,7 @@ const userSurveyReducer = function(state = null, {type, payload}) {
                     errorMessage: payload.errorMessage,
                 }
         
-        case READ_URL_TOKEN:
+        case CHECK_SURVEY_TOKEN:
                 return (
                     Object.assign({}, state, payload)
                 );

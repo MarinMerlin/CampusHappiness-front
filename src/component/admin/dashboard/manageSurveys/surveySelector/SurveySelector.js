@@ -23,6 +23,7 @@ class SurveySelector extends Component {
     }
 
     changeSondageSelection = (e)=>{
+        console.log('selection')
         this.props.changeSondageSelection(this.getSondageById(e.target.value))
     }
 
@@ -31,14 +32,18 @@ class SurveySelector extends Component {
             console.log(res);
         });
     }
+
+    refreshSelection = ()=>{
+        this.forceUpdate()
+    } 
     
     render(){
-        
         return(
             <Paper style={{padding: '2vh'}} >
                 <Typography style={titleStyle} > Select the next sondage </Typography>
                 <Select
                     value={this.props.selectedSondage.id}
+                    onClick= {this.refreshSelection}
                     onChange={this.changeSondageSelection}
                 >
                     {this.props.sondageList.map(sondage=>(

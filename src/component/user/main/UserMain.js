@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import {AppBar, Toolbar, Typography, Drawer, Divider} from '@material-ui/core';
+import {AppBar, Toolbar, Typography, Drawer, Divider, Badge} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -15,6 +15,7 @@ import Menu from '@material-ui/core/Menu';
 
 import { toggleDrawer, switchPage } from '../../../redux/user/actions/userMainActions';
 import { logout } from '../../../redux/admin/actions/authAction';
+import { getToken } from '../../../redux/user/actions/userSurveyActions';
 import Home from './home/Home';
 import Stat from './stat/Stat';
 import Account from './account/Account';
@@ -50,6 +51,12 @@ const styles = theme => ({
         backgroundColor: '#4286f4',
         padding:0, 
         margin:0
+    },
+    badge : {
+        top: 5,
+        right: -10,
+        width: '1em',
+        height: '1em',
     }   
 });
 class UserMain extends Component {
@@ -60,7 +67,7 @@ class UserMain extends Component {
     
     constructor(props){
         super(props);
-
+        props.getToken();
         this.onListItemClick = this.onListItemClick.bind(this);
         this.onToggleMenu = this.onToggleMenu.bind(this);
     }
@@ -142,14 +149,19 @@ class UserMain extends Component {
                 <ListItemText primary="Home" />
                 <HomeRounded/>
             </ListItem>
+            
+            <Badge color={this.props.alreadyAnswered ? 'black' : 'secondary'} classes={{ badge: this.props.classes.badge}} >
             <ListItem
                 button
                 selected={this.props.selectedPage === 1}
                 onClick={this.onListItemClick(1)}
             >
+                
                 <ListItemText primary="Survey" />
+                
                 <SubjectRounded/>
             </ListItem>
+            </Badge>
             <ListItem
                 button
                 selected={this.props.selectedPage === 2}
@@ -181,12 +193,13 @@ class UserMain extends Component {
     )
   }
 }
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
     return {
         toggleDrawer: state.userMain.toggleDrawer,
         selectedPage: state.userMain.selectedPage,
         redirectToLogin: state.userMain.redirectToLogin,
         connectedUser: state.userMain.connectedUser,
+        alreadyAnswered: state.userSurvey.alreadyAnswered,
     }
 };
 
@@ -194,6 +207,7 @@ const mapActionsToProps = {
     onToggleDrawer: toggleDrawer,
     onListItemClick: switchPage,
     onLogout: logout,
+    getToken: getToken,
     
 };
 

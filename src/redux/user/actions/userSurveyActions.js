@@ -1,7 +1,7 @@
 import axios from 'axios';
 import url from 'url';
 import jwt from 'jsonwebtoken';
-import { GET_USER_SURVEY, READ_URL_TOKEN, SHOW_ERROR, GET_MAIL_INTENSITY, RADIO_BUTTON, COMMENT, SET_ALREADY_ANSWERED } from './userTypes';
+import { GET_USER_SURVEY, CHECK_SURVEY_TOKEN, SHOW_ERROR, GET_MAIL_INTENSITY, RADIO_BUTTON, COMMENT, SET_ALREADY_ANSWERED } from './userTypes';
 import env from '../../../const.js';
 
 
@@ -44,10 +44,11 @@ export { getSurvey };
 const getToken = (next = () => {}) => (dispatch) => {
     axios.get(serverUrl+'/user/getToken')
     .then( (res) => {
+        console.log(" réponse du serveur :", res);
         let decoded = jwt.decode(res.data.token);
         dispatch({
-            type: READ_URL_TOKEN,
-            payload: Object.assign(decoded, { token: res.data.token }),
+            type: CHECK_SURVEY_TOKEN,
+            payload: Object.assign(decoded, { token: res.data.token, alreadyAnswered: res.data.alreadyAnswered }),
         });
         next(res.data.token);
     })
@@ -65,7 +66,7 @@ const getToken = (next = () => {}) => (dispatch) => {
 
 export { getToken };
 
-const readUrlToken = (urlArg, next = (token) => {}) => (dispatch) => {
+const readUrlToken = (urlArg, next = () => {}) => (dispatch) => {
     let token;
     try{
     token = url.parse(urlArg, true, true).query.token;
@@ -94,7 +95,7 @@ const readUrlToken = (urlArg, next = (token) => {}) => (dispatch) => {
     try{
         let decoded = jwt.decode(token);
         dispatch({
-            type: READ_URL_TOKEN,
+            type: CHECK_SURVEY_TOKEN,
             payload: Object.assign(decoded, {token: token}),
         });
         next(token);
