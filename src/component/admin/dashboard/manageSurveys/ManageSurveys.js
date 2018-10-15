@@ -8,11 +8,6 @@ import { getSondageData } from '../../../../redux/admin/actions/manageSurveyActi
 const firstDivStyle = { padding:'3vh', backgroundColor:'#2c3e50', minHeight:"100vh" }
 
 class SurveyManager extends Component {
-    state = {
-        sondageList: [],
-        currentSondage: null,
-        loaded: false,
-    }
 
     componentDidMount(){
         this.props.getSondageData()
