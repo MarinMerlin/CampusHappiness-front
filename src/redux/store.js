@@ -22,6 +22,8 @@ const initialState = {
     },
     userStat : {
         monthSatisfaction: null,
+        statShown: 0,
+        thematiqueList: null,
     },
     generalStat: {
         totalSent: 0,
