@@ -40,15 +40,13 @@ const Adder = ({
             alignItems= 'center'
             style={{
                 width: '100vw',
-                backgroundColor: 'red'
             }}
         >
             <Card
                 style={{
                     marginTop:'5vh',
                     padding: '2vh',
-                    width: '100vh',
-                    backgroundColor: 'blue'
+                    width: '100vw',
                 }}
             >
                 <Grid 

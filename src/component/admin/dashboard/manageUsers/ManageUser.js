@@ -8,7 +8,6 @@ import UserTable from './UserTable';
 
 const itemStyle = {
   width: '100vw',
-  backgroundColor: 'grey'
 }
 
 const initialState = {

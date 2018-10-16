@@ -84,7 +84,6 @@ const postSurvey = (survey, sondageList)=>(dispatch)=>{
             })
         }
     })
-
 }
 
 
