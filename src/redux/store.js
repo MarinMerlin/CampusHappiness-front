@@ -73,7 +73,8 @@ const initialState = {
         mailIntensityError: null,
     },
     manageUser: {
-        success: null
+        success: null,
+        userArray: null
     }
 };
 

@@ -10,6 +10,11 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
+const inputStyle = {
+    margin: '2vh',
+    width: '22vw'
+}
+
 const Adder = ({
     uploadUserList,
     onKeyPress,
@@ -33,103 +38,82 @@ const Adder = ({
     }
 
     return (
-        <Grid
-            container
-            direction= 'column'
-            justify= 'center'
-            alignItems= 'center'
-            style={{
-                width: '100vw',
-            }}
-        >
-            <Card
+        <Card style={{width: '96vw', margin: 'auto', marginTop: '3vh'}} >
+            <Grid 
+                container 
+                direction='row' 
+                justify= 'center'
+                alignItems= 'center'
                 style={{
-                    marginTop:'5vh',
-                    padding: '2vh',
-                    width: '100vw',
+                    padding: '3vh'
                 }}
             >
-                <Grid 
-                    container 
-                    direction='row' 
-                    justify= 'center'
-                    alignItems= 'center'
-                >
-                    <TextField
-                    id="fn"
-                    name="firstName"
-                    label="firstName"
-                    value={firstName}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={onKeyPress}
-                    />
-                    <TextField
-                    id="ln"
-                    name="lastName"
-                    label="lastName"
-                    value={lastName}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={onKeyPress}
-                    />
-                    <TextField
-                    id="email"
-                    name="email"
-                    label="email"
-                    value={email}
-                    margin="normal"
-                    variant="outlined"
-                    onChange={onKeyPress}
-                    />
-                </Grid>
-                <Grid
-                    container 
-                    direction='row' 
-                    justify= 'center'
-                    alignItems= 'center'
-                >
-                    <FormControlLabel
-                        control={
-                            <Checkbox
-                            checked={checkBoxState}
-                            value="checkedB"
-                            color="primary"
-                            onClick={adminCheckBox}
-                            />
-                        }
-                        label="Admin status"
-                    />
-                    <Button variant="contained" color="primary" onClick={singlePost} >
-                        Add User
-                    </Button>
-                </Grid>
-            </Card>
-            <Card
+                <TextField
+                id="fn"
+                name="firstName"
+                label="firstName"
+                value={firstName}
+                margin="normal"
+                variant="outlined"
+                onChange={onKeyPress}
+                style={inputStyle}
+                />
+                <TextField
+                id="ln"
+                name="lastName"
+                label="lastName"
+                value={lastName}
+                margin="normal"
+                variant="outlined"
+                onChange={onKeyPress}
+                style={inputStyle}
+                />
+                <TextField
+                id="email"
+                name="email"
+                label="email"
+                value={email}
+                margin="normal"
+                variant="outlined"
+                onChange={onKeyPress}
+                style={inputStyle}
+                />
+                <FormControlLabel
+                    control={
+                        <Checkbox
+                        checked={checkBoxState}
+                        value="checkedB"
+                        color="primary"
+                        onClick={adminCheckBox}
+                        />
+                    }
+                    label="Admin status"
+                />
+                <Button variant="contained" color="primary" onClick={singlePost} size='large' >
+                    Add User
+                </Button>
+            </Grid>
+            <Grid
+                container 
+                direction='row' 
+                justify= 'center'
+                alignItems= 'center'
                 style={{
-                    marginTop:'5vh',
-                    padding: '2vh',
-                    width: '100vh'
+                    padding: '3vh'
                 }}
             >
-                <Grid
-                    container
-                    direction='row' 
-                    justify= 'center'
-                    alignItems= 'center'
-                >
-                    <CSVReader
-                        cssClass="csv-input"
-                        label="Select CSV with users "
-                        onFileLoaded={handleFile}
-                        onError={uploadError}
-                        inputId="ObiWan"
-                    />
-                    <Button variant="contained" onClick={csvPost}>
-                        Add User via CSV
-                    </Button>
-                </Grid>
-            </Card>
+                <CSVReader
+                    cssClass="csv-input"
+                    label="Select CSV with users "
+                    onFileLoaded={handleFile}
+                    onError={uploadError}
+                    inputId="ObiWan"
+                />
+                <Button variant="contained" onClick={csvPost} size='small' >
+                    add user via csv
+                </Button>
+            </Grid>
+
             <Snackbar
             anchorOrigin={{
                 vertical: 'bottom',
@@ -152,7 +136,7 @@ const Adder = ({
             </IconButton>,
             ]}
             />
-        </Grid>
+        </Card>
     )
 }
 

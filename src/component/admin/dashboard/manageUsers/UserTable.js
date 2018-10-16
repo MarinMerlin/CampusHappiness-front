@@ -5,49 +5,59 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { Card } from '@material-ui/core';
+import TableFooter from '@material-ui/core/TableFooter';
+import TablePagination from '@material-ui/core/TablePagination';
 
-let id = 0;
-function createData(name, calories, fat, carbs, protein) {
-  id += 1;
-  return { id, name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
-const UserTable = () => {
-  return (
-    <Card style={{marginTop: '6vh', width: '90vh'}} >
+const UserTable = ({page, handleChangePage, userArray, rowsPerPage, handleChangeRowsPerPage}) => {
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, userArray.length - page * rowsPerPage);
+    return (
+    <Card style={{width: '96vw', margin: 'auto', marginTop: '3vh'}} >
         <Table>
             <TableHead>
                 <TableRow>
-                <TableCell>Dessert (100g serving)</TableCell>
-                <TableCell numeric>Calories</TableCell>
-                <TableCell numeric>Fat (g)</TableCell>
-                <TableCell numeric>Carbs (g)</TableCell>
-                <TableCell numeric>Protein (g)</TableCell>
+                    <TableCell>First Name</TableCell>
+                    <TableCell>Last Name</TableCell>
+                    <TableCell>Email</TableCell>
+                    <TableCell>Pseudo</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
-                {rows.map(row => {
-                return (
-                    <TableRow key={row.id}>
-                    <TableCell component="th" scope="row">
-                        {row.name}
-                    </TableCell>
-                    <TableCell numeric>{row.calories}</TableCell>
-                    <TableCell numeric>{row.fat}</TableCell>
-                    <TableCell numeric>{row.carbs}</TableCell>
-                    <TableCell numeric>{row.protein}</TableCell>
+                {userArray.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(user => {
+                    return (
+                    <TableRow key={user.id} hover={true}>
+                        <TableCell component="th" scope="row">
+                            {user.firstName}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                            {user.lastName}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                            {user.email}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                            {user.pseudo}
+                        </TableCell>
                     </TableRow>
-                );
+                    );
                 })}
+                {emptyRows > 0 && (
+                    <TableRow style={{ height: 48 * emptyRows }}>
+                    <TableCell colSpan={6} />
+                    </TableRow>
+                )}
             </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  colSpan={3}
+                  count={userArray.length}
+                  page={page}
+                  rowsPerPage= {rowsPerPage}
+                  onChangePage={handleChangePage}
+                  onChangeRowsPerPage = {handleChangeRowsPerPage}
+                />
+              </TableRow>
+            </TableFooter>
         </Table>
     </Card>
   )
