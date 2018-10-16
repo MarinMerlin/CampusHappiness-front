@@ -2,8 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import {
-    Typography, Grid, Paper, TextField, FormGroup, FormControlLabel, Radio, Button, Snackbar
+    Typography, Grid, Paper, TextField, Radio, Button, Snackbar
 } from '@material-ui/core';
+
+import { Link, Element } from 'react-scroll';
 
 import { handleChange } from "../../redux/user/actions/userSurveyActions";
 
@@ -83,8 +85,12 @@ function AnswerButtons(props) {
 }
 
 function Thematiques(props) {
+    var questionStartingCount = 0;
+    const questionsStartingCountUpdate = (nbr) => {
+        questionStartingCount += nbr;
+    }
     return (
-        <div>
+        <div style={{ fontFamily: 'Roboto' }}>
             <ul>
                 {
                     props.thematiqueList.map(theme => (
@@ -97,7 +103,9 @@ function Thematiques(props) {
                                     answers={props.answers}
                                     alreadyAnswered={props.alreadyAnswered}
                                     handleChange={props.handleChange}
+                                    questionStartingCount={questionStartingCount}
                                 />
+                                {questionsStartingCountUpdate(theme.questionList.length)}
                                 <CommentArea
                                     key={"Comment" + theme.id}
                                     theme={theme}
@@ -132,6 +140,10 @@ function CommentArea(props) {
 }
 
 function QuestionArea(props) {
+    var questionNumber = props.questionStartingCount;
+    const increment = () => {
+        questionNumber++;
+    }
     return (
         <ul>
             {props.questions.map(question => (
@@ -143,7 +155,9 @@ function QuestionArea(props) {
                         answers={props.answers}
                         handleChange={props.handleChange}
                         alreadyAnswered={props.alreadyAnswered}
+                        questionNumber={questionNumber}
                     />
+                    {increment()}
                 </div>
             ))}
         </ul>
@@ -170,36 +184,11 @@ function Choices(props) {
             },
         ];
     }
-    /*
-    return (
-        <FormGroup row>
-            <Grid container justify="center" direction="row">
-                <ul style={{display: "inline"}}>
-                    {choices.map(choice => (
-                        <li style={{display: "inline"}} key={"li" + choice.id}>
-                        <Grid item key={"item" + choice.id}>
-                            <FormControlLabel
-                                key={"FormControle" + choice.id}
-                                disabled={props.alreadyAnswered}
-                                label={choice.label}
-                                control={
-                                    <Radio
-                                        key={"Radio" + choice.id}
-                                        color={choice.color}
-                                        checked={props.answers.get(props.question.id) === choice.value}
-                                        onChange={props.handleChange({ id: props.question.id, type: "radioButton", value: choice.value })}
-                                    />
-                                }
-                            />
-                        </Grid>
-                        </li>
-                    ))}
-                </ul>
-            </Grid>
-        </FormGroup>
-    );*/
+
     return(
         <div>
+        <Element name={props.questionNumber}>
+        <Link to={props.questionNumber+1} smooth={true} duration={500} offset={-250}>
         {choices.map(choice => (
             <label key={"label"+choice.id} style={{padding: 20, fontStyle: 'italic'}}>
             {choice.label}
@@ -214,6 +203,8 @@ function Choices(props) {
         )
         )
         }
+        </Link>
+        </Element>
         </div>
 
     )
