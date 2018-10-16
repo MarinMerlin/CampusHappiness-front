@@ -4,7 +4,8 @@ import id_generator from '../../../customFunction/idGenerator'
 import { 
     GET_SONDAGE_DATA_ACTION,
     CHANGE_SONDAGE_SELECTION_ACTION ,
-    POST_SURVEY_ACTION
+    POST_SURVEY_ACTION,
+    GET_KEYWORDS_ACTION
 } from "./adminTypes";
 
 const getSondageData = ()=>(dispatch)=> {
@@ -27,6 +28,30 @@ const getSondageData = ()=>(dispatch)=> {
             }
         })
     });
+}
+
+const getKeywordList = () => (dispatch) => {
+    axios.get("http://localhost:4200/admin/getKeywords")
+    .then( res => {
+        dispatch({  
+            type: GET_KEYWORDS_ACTION,
+            payload: {
+                list: res.data,
+            }
+        })
+    })
+}
+
+const addKeyword = (newKeyword) => (dispatch) => {
+    axios.post("http://localhost:4200/admin/addKeyWord", {name: newKeyword})
+        .then(res => {
+            dispatch({  
+                type: GET_KEYWORDS_ACTION,
+                payload: {
+                    list: res.data,
+                }
+            })
+        });
 }
 
 const changeSondageSelection = (sondage)=>(dispatch)=>{
@@ -63,4 +88,4 @@ const postSurvey = (survey, sondageList)=>(dispatch)=>{
 }
 
 
-export { getSondageData, changeSondageSelection, postSurvey }
+export { getSondageData, changeSondageSelection, postSurvey, getKeywordList, addKeyword }

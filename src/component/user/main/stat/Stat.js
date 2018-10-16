@@ -50,14 +50,7 @@ export class Stat extends Component {
   handleClose = () => {
       this.setState({ anchorEl: null });
   };
-  showThemStat(statThematique){
-    const { classes } = this.props;
-    return(
-    <Grid className={classes.default}>
-        <LongSoftLine data= {statThematique} />
-    </Grid>
-    );
-  }
+  
   render() {
     const { classes } = this.props;
     const { anchorEl } = this.state;
@@ -103,35 +96,6 @@ export class Stat extends Component {
                   })}
               </Menu>
             </div>}
-            {/* this.props.stat &&
-            <Grid item>
-              <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel
-                  ref={ref => {
-                    this.InputLabelRef = ref;
-                  }}
-                  htmlFor="outlined-age-simple"
-                >
-                  Age
-                </InputLabel>
-                <Select
-                  value={this.props.statShown}
-                  onChange={this.handleChange}
-                  input={
-                    <OutlinedInput
-                      name="age"
-                      id="outlined-age-simple"
-                      labelWidth={1}
-                    />
-                  }
-                >
-                <MenuItem key={this.props.stat[0].name} value={1}>{this.props.stat[0].name}</MenuItem>
-                  {this.props.stat.map(stat => {
-                    return (<MenuItem key={stat.name} value={1}>{stat.name}</MenuItem>)
-                  })}
-                </Select>
-              </FormControl>
-            </Grid> */}
           </Grid>
           {this.props.stat &&
           <Grid className={classes.default}>

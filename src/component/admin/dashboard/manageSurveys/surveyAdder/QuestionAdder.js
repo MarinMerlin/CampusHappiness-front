@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, TextField, Grid, Tooltip, IconButton } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
+import KeywordAdder from './KeywordAdder';
 
 const QuestionAdder = ({
     thematiqueId,
@@ -12,11 +13,12 @@ const QuestionAdder = ({
 
     function handleQuestionChange(e){
         let newQuestion = question
-        if (e.target.name==="text") {
+        if (e.target.getAttribute('name')==="text") {
             newQuestion.text = e.target.value
         }
-        else if (e.target.name==="key word") {
-            newQuestion.keyWord = e.target.value
+        else if (e.target.getAttribute('name')==="keyword") {
+            console.log(e.target.getAttribute('value'));
+            newQuestion.keyWord = e.target.getAttribute('value');
         }
         changeQuestion(thematiqueId ,questionId, newQuestion)
     }
@@ -42,13 +44,8 @@ const QuestionAdder = ({
             <Grid item sm={1} >
             </Grid>
             <Grid item sm={2} >
-                <TextField
-                    name='key word'
-                    id={questionId}
-                    label="question key word"
-                    value={question.keyWord}
-                    onChange={handleQuestionChange}
-                    margin="normal"
+                <KeywordAdder
+                    onKeywordChange = {handleQuestionChange}
                 />
             </Grid>
             <Grid item sm={1} >

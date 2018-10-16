@@ -37,7 +37,7 @@ class Adder extends Component {
             <div>
                 <Card className={classes.card}>
                     <CardContent>
-                    <Typography variant="title">Add User</Typography>
+                    <Typography variant="h6">Add User</Typography>
                     <div>
                         <CsvAdder uploadUsers={this.uploadUserList}/>
                         {this.props.userList && <button onClick={this.postUsers} >add users</button>}

@@ -54,7 +54,7 @@ class SingleAdder extends Component {
         const { classes } = this.props;
         return(
             <div>
-                <Typography variant="body2">Add single User</Typography>
+                <Typography variant="body1">Add single User</Typography>
                 <form className={classes.container} noValidate autoComplete="off">
                     <TextField
                         id="firstName"

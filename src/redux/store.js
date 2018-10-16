@@ -51,6 +51,7 @@ const initialState = {
         currentSondage: null,
         loaded: false,
         selectedSondage: {},
+        keywordList: null,
     },
     userSurvey: {
         loaded: false,

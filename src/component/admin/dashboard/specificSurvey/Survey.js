@@ -2,7 +2,7 @@ import React from 'react';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Paper, Typography, Grid, GridList, GridListTile } from '@material-ui/core';
+import { Paper, Typography, Grid, GridList, GridListTile, Card } from '@material-ui/core';
 import ThematiqueDisplayer from './ThematiqueDisplayer';
 import CommentsDisplayer from './CommentsDisplayer';
 
@@ -27,13 +27,21 @@ class Survey extends React.Component {
         <Grid item style={{width:'97%'}} >
           {!this.props.loaded && <h1>Chargement</h1>}  
           {this.props.loaded &&  
-          <GridList spacing={20} cellHeight={'auto'} cols={3} style={{marginTop:'10vh'}} >
-            {this.props.thematiqueList.map(thematiqueData => (
-              <GridListTile key={thematiqueData.name}>
-                <ThematiqueDisplayer thematique={thematiqueData}/>
-              </GridListTile>
-            ))}
-          </GridList>}
+          <div>
+            {this.props.thematiqueList ? 
+              <GridList spacing={20} cellHeight={'auto'} cols={3} style={{marginTop:'10vh'}} >
+              {this.props.thematiqueList.map(thematiqueData => (
+                <GridListTile key={thematiqueData.name}>
+                  <ThematiqueDisplayer thematique={thematiqueData}/>
+                </GridListTile>
+              ))}
+            </GridList>
+            : <Card style={{margin:10}}><Typography align="center" variant="h3" style={{margin:'10vw'}}>
+                No survey today
+              </Typography></Card>
+            }
+          </div>
+          }
           {!this.props.loaded && <h1>Chargement</h1>}  
           {this.props.loaded &&  <CommentsDisplayer comments={this.props.comments} />}
         </Grid>

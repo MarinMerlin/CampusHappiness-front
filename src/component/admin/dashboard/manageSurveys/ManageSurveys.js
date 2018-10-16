@@ -3,7 +3,7 @@ import SurveySelector from './surveySelector/SurveySelector';
 import SurveyAdder from './surveyAdder/SurveyAdder';
 
 import { connect } from 'react-redux';
-import { getSondageData } from '../../../../redux/admin/actions/manageSurveyAction';
+import { getSondageData, getKeywordList } from '../../../../redux/admin/actions/manageSurveyAction';
 
 const firstDivStyle = { padding:'3vh', backgroundColor:'#2c3e50', minHeight:"100vh" }
 
@@ -11,6 +11,7 @@ class SurveyManager extends Component {
 
     componentDidMount(){
         this.props.getSondageData()
+        this.props.getKeywordList()
     }
     
     render(){
@@ -29,7 +30,8 @@ const mapStateToProps = state=>{
 }
 
 const mapActionsToProps = {
-    getSondageData: getSondageData
+    getSondageData: getSondageData,
+    getKeywordList: getKeywordList
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(SurveyManager)

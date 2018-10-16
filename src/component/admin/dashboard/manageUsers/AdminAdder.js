@@ -59,7 +59,7 @@ class AdminAdder extends Component {
             <div>
                 <Card className={classes.card}>
                     <CardContent>
-                    <Typography variant="title">Ajouter un nouveau administrateur</Typography>
+                    <Typography variant="h6">Ajouter un nouveau administrateur</Typography>
                     <form className={classes.container} noValidate autoComplete="off">
                         <TextField
                         id="outlined-name"

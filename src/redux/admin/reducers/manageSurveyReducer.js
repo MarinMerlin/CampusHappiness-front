@@ -1,4 +1,4 @@
-import { GET_SONDAGE_DATA_ACTION, CHANGE_SONDAGE_SELECTION_ACTION, POST_SURVEY_ACTION } from '../actions/adminTypes';
+import { GET_SONDAGE_DATA_ACTION, CHANGE_SONDAGE_SELECTION_ACTION, POST_SURVEY_ACTION, GET_KEYWORDS_ACTION } from '../actions/adminTypes';
 
 const manageSurveyReducer = function(state = null, {type, payload}){
     switch (type) {
@@ -19,6 +19,11 @@ const manageSurveyReducer = function(state = null, {type, payload}){
             return {
                 ...state,
                 sondageList: payload.newSondageList
+            }
+        case GET_KEYWORDS_ACTION:
+            return {
+                ...state,
+                keywordList: payload.list
             }
         default:
             return state
