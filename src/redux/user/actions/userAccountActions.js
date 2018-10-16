@@ -55,7 +55,6 @@ export function updateAccount(data) {
 }
 
 const updatePhoto = (updatedPhoto) => (dispatch) => {
-    console.log(updatedPhoto);
     axios.post('http://localhost:4200/user/updatePhoto', {photo: updatedPhoto})
     .then( res => {
         if(res.status === 200){

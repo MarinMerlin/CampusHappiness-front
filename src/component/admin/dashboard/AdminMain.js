@@ -63,7 +63,7 @@ class AdminMain extends React.Component{
                     <Grid container alignItems="center">
                         <Grid item sm={2}>
                             <Toolbar>
-                                <Typography variant="title" style={{color: '#2c3e50', fontFamily: 'Roboto', fontWeight:100}}>
+                                <Typography variant="h6" style={{color: '#2c3e50', fontFamily: 'Roboto', fontWeight:100}}>
                                     Welcome {this.props.user && this.props.user.pseudo}
                                 </Typography>
                                 <Button

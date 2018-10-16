@@ -8,8 +8,8 @@ const SoftLine = ({data}) => {
     const secondStyle = {color:'white', fontFamily: 'Roboto', fontWeight:100, fontSize:'1em', paddingLeft: '3vh', paddingRight: '3vh'}
     return (
     <Card style={cardStyle} >
-        <Typography variant='display1' style={firstStyle} >{data.total}</Typography>
-        <Typography variant='display1' style={secondStyle} >{data.name}</Typography>
+        <Typography variant='h4' style={firstStyle} >{data.total}</Typography>
+        <Typography variant='h4' style={secondStyle} >{data.name}</Typography>
         <Line data={data.chartData} options={data.option} />
     </Card>
 )}
