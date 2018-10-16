@@ -150,7 +150,7 @@ class UserMain extends Component {
                 <HomeRounded/>
             </ListItem>
             
-            <Badge color={this.props.alreadyAnswered ? 'black' : 'secondary'} classes={{ badge: this.props.classes.badge}} >
+            <Badge color={this.props.alreadyAnswered ? 'black' : 'secondary'} classes={{ badge: this.props.classes.badge}} badgeContent="">
             <ListItem
                 button
                 selected={this.props.selectedPage === 1}
