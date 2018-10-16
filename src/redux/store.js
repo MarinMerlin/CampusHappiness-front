@@ -9,7 +9,7 @@ const initialState = {
         password: '',
         isConnected: false,
         booleanShowPassword: false,
-        onPage: 2
+        onPage: 3
     },
     userMain: {
         toggleDrawer: false,
@@ -22,6 +22,8 @@ const initialState = {
     },
     userStat : {
         monthSatisfaction: null,
+        statShown: 0,
+        thematiqueList: null,
     },
     generalStat: {
         totalSent: 0,
@@ -49,6 +51,7 @@ const initialState = {
         currentSondage: null,
         loaded: false,
         selectedSondage: {},
+        keywordList: null,
     },
     userSurvey: {
         loaded: false,

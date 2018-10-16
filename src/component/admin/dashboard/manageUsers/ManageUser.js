@@ -33,7 +33,7 @@ class ManageUser extends Component {
           <Grid item>
           <Card className={classes.card}>
             <CardContent>
-            <Typography variant="headline" component="h2">Admin page</Typography>
+            <Typography variant="h5" component="h2">Admin page</Typography>
               <AdminAdder/>
               <Adder/>
             </CardContent>

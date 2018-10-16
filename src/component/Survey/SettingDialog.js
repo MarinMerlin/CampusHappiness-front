@@ -54,7 +54,7 @@ class SettingDialog extends React.Component {
                     <DialogTitle><Icon>account_circle</Icon> {this.props.firstName} {this.props.lastName} </DialogTitle>
 
                     <DialogContent>
-                        {this.props.mailIntensityError ? <Typography variant="title" color="secondary"> {this.props.mailIntensityError} </Typography>
+                        {this.props.mailIntensityError ? <Typography variant="h6" color="secondary"> {this.props.mailIntensityError} </Typography>
                         :
                         <TextField
                         label="Jours entre 2 mails ?"

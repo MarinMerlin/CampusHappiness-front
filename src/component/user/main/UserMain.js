@@ -86,6 +86,7 @@ class UserMain extends Component {
 
     onListItemClick = (pageNb) => () => {
         this.props.onListItemClick(pageNb);
+        this.props.onToggleDrawer(false);
     }
 
     onRedirectAdmin = () => {
@@ -104,10 +105,10 @@ class UserMain extends Component {
                 <IconButton className={classes.menuButton} onClick={this.onToggleDrawer(true)} color="inherit" aria-label="Menu">
                 <MenuIcon />
                 </IconButton>
-                {this.props.selectedPage === 0 && <Typography className={classes.pageTitle} variant="title" align="center">  Home </Typography>}
-                {this.props.selectedPage === 1 && <Typography className={classes.pageTitle} variant="title" align="center">  Survey </Typography>}
-                {this.props.selectedPage === 2 && <Typography className={classes.pageTitle} variant="title" align="center">  Stat </Typography>}
-                {this.props.selectedPage === 3 && <Typography className={classes.pageTitle} variant="title" align="center">  Account </Typography>}
+                {this.props.selectedPage === 0 && <Typography className={classes.pageTitle} variant="h6" align="center">  Home </Typography>}
+                {this.props.selectedPage === 1 && <Typography className={classes.pageTitle} variant="h6" align="center">  Survey </Typography>}
+                {this.props.selectedPage === 2 && <Typography className={classes.pageTitle} variant="h6" align="center">  Stat </Typography>}
+                {this.props.selectedPage === 3 && <Typography className={classes.pageTitle} variant="h6" align="center">  Account </Typography>}
                 {this.props.connectedUser && <Typography color="inherit">Welcome {this.props.connectedUser.lastName}</Typography>}
                 <div>
                     <IconButton

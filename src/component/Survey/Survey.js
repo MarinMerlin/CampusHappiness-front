@@ -50,7 +50,7 @@ class Survey extends React.Component {
             headDisplay = <Loading />;
         }
         else {
-            headDisplay = <Typography variant="headline" align="center" color="textPrimary" gutterBottom> Bonjour {this.props.firstName} </Typography>
+            headDisplay = <Typography variant="h5" align="center" color="textPrimary" gutterBottom> Bonjour {this.props.firstName} </Typography>
         }
         return (
             <div>

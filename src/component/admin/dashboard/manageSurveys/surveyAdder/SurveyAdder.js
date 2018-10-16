@@ -129,7 +129,7 @@ class SurveyAdder extends Component {
                 this.setState({ open: true });
             }
             else{
-                this.props.postSurvey(survey)
+                this.props.postSurvey(survey, this.props.sondageList)
             }
         })
     }

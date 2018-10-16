@@ -90,6 +90,13 @@ const type_softLine_constructor = function(inputData){ // soft line graph
 const type_longSoftLine_constructor = function(inputData){ // first line (month happyness)
     let {min, max} = setYRange(inputData.dataArray)
     min = Math.max(min, 0)
+    let name = "";
+    if(inputData.name){
+        name = inputData.name;
+    } else {
+        name = "Month Happyness"
+    }
+    
     let chartData = {
         labels: inputData.xLabel,
         datasets:[{
@@ -131,7 +138,7 @@ const type_longSoftLine_constructor = function(inputData){ // first line (month 
             }]
         },
     }
-    return {chartData: chartData, option: option, boxColor: inputData.boxColor}
+    return {name, chartData: chartData, option: option, boxColor: inputData.boxColor}
 }
 
 const type_doubleCircleLine_constructor = function(inputData){ // soft circle graph

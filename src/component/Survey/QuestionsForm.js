@@ -23,7 +23,7 @@ class QuestionsFrom extends React.Component {
         }
         return (
             <div>
-                <Typography variant="title" align="center" gutterBottom color="textPrimary">
+                <Typography variant="h6" align="center" gutterBottom color="textPrimary">
                     Sondage {this.props.sondageName}
                 </Typography>
                 <form onSubmit={this.props.handleChange({ type: 'submit' }, this.validate)}>

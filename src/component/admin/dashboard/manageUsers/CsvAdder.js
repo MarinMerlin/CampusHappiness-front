@@ -16,7 +16,7 @@ class CsvAdder extends Component {
     render(){
         return(
             <div>
-                <Typography variant="body2">CSV adder</Typography>
+                <Typography variant="body1">CSV adder</Typography>
                 <CSVReader
                     cssClass="csv-input"
                     label="Select CSV with users "
