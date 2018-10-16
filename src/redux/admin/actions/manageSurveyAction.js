@@ -74,13 +74,6 @@ const postSurvey = (survey, sondageList)=>(dispatch)=>{
                     question.id = id_generator()
                 })
             })
-<<<<<<< HEAD
-            console.log(survey);
-            console.log(newSondageList)
-=======
-            console.log("sondage list:  ", newSondageList)
-            console.log("new sondage:  ", survey)
->>>>>>> refs/remotes/origin/dev
             survey.current = false
             newSondageList.push(survey)
             dispatch({
