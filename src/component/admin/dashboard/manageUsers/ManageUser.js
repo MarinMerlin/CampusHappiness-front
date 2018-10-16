@@ -93,7 +93,6 @@ class ManageUser extends Component {
 
   render() {
     return (
-<<<<<<< HEAD
       <Grid
         container
         direction= 'column'
@@ -126,23 +125,6 @@ class ManageUser extends Component {
         <Grid item style={itemStyle}>
           <UserTable/>
         </Grid>
-=======
-      <div>
-        <Grid
-          container
-          justify="center"
-          alignItems="center"
-        >
-          <Grid item>
-          <Card className={classes.card}>
-            <CardContent>
-            <Typography variant="h5" component="h2">Admin page</Typography>
-              <AdminAdder/>
-              <Adder/>
-            </CardContent>
-          </Card>
-          </Grid>
->>>>>>> refs/remotes/origin/dev
       </Grid>
     );
   }
