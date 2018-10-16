@@ -13,12 +13,11 @@ const QuestionAdder = ({
 
     function handleQuestionChange(e){
         let newQuestion = question
-        if (e.target.getAttribute('name')==="text") {
+        if (e.target.name==="text") {
             newQuestion.text = e.target.value
         }
-        else if (e.target.getAttribute('name')==="keyword") {
-            console.log(e.target.getAttribute('value'));
-            newQuestion.keyWord = e.target.getAttribute('value');
+        else if (e.target.name==="keyword") {
+            newQuestion.keyWord = e.target.value;
         }
         changeQuestion(thematiqueId ,questionId, newQuestion)
     }
@@ -29,7 +28,7 @@ const QuestionAdder = ({
 
     return (
     <Card style={{padding: '1vh', marginTop:'1vh', backgroundColor:'#bdc3c7'}} >
-        <Grid container>
+        <Grid container alignItems="center">
             <Grid item sm={8}>
                 <TextField 
                     fullWidth
