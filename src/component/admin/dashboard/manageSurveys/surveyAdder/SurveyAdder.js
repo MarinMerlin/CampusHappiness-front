@@ -148,7 +148,7 @@ class SurveyAdder extends Component {
                     aria-describedby="alert-dialog-description"
                 >
                     <DialogContent>
-                        <DialogTitle id="alert-dialog-title">Can't post survey</DialogTitle>
+                        <DialogTitle id="alert-dialog-title">Fail to post survey</DialogTitle>
                         {this.state.missingSurveyName && <DialogContentText id="surveyName">{messageMissingSurveyName}</DialogContentText> }
                         {this.state.missingThematiqueName && <DialogContentText id="thematiqueName">{messageMissingThematiqueName}</DialogContentText> }
                         {this.state.missingQuestionText && <DialogContentText id="surveyName">{messageMissingQuestionText}</DialogContentText> }

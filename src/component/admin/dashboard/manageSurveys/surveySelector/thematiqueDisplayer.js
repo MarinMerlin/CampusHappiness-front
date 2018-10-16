@@ -5,6 +5,11 @@ const titleStyle = { fontFamily: 'Roboto', fontSize: '1.5em', color: '#2c3e50', 
 const questionStyle = { fontFamily: 'Roboto', fontSize: '1em', color: '#2c3e50', fontWeight: 100, marginBottom:'1vh'}
 
 const ThematiqueDisplayer = ({thematique}) => {
+    thematique.questionList.forEach(question => {
+        if (question.text) {
+            question.question = question.text
+        }
+    });
     return (
         <Card style={{backgroundColor: '#ecf0f1', margin: '1vh', padding: '1vh'}} >
             <Typography style={titleStyle} >

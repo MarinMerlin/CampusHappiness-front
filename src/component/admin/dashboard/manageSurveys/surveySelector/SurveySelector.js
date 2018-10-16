@@ -24,6 +24,7 @@ class SurveySelector extends Component {
 
     changeSondageSelection = (e)=>{
         console.log('selection')
+        console.log(e.target.value)
         this.props.changeSondageSelection(this.getSondageById(e.target.value))
     }
 
