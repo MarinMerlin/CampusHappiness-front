@@ -49,6 +49,8 @@ const postSurvey = (survey, sondageList)=>(dispatch)=>{
                     question.id = id_generator()
                 })
             })
+            console.log(survey);
+            console.log(newSondageList)
             survey.current = false
             newSondageList.push(survey)
             dispatch({

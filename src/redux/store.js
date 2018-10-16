@@ -70,9 +70,7 @@ const initialState = {
         mailIntensityError: null,
     },
     manageUser: {
-        userList: null,
-        csvServerRespons: null,
-        singleServerRespons: null
+        success: null
     }
 };
 

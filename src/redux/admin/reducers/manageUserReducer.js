@@ -1,30 +1,20 @@
 import { 
-    UPLOAD_USERLIST_ACTION, 
-    POST_USER_ACTION, 
-    POST_SINGLE_USER_ACTION,
-    POST_ADMIN_ACTION
+    POST_USERS_ACTION, 
+    CLOSE_SUCCESS_MESSAGE_ACTION
 } from '../actions/adminTypes';
 
 const manageUserReducer = function(state = null, {type, payload}){
     switch (type) {
-        case UPLOAD_USERLIST_ACTION:
+        case POST_USERS_ACTION:
             return {
                 ...state,
-                userList: payload.userList
+                success: payload.success
             }
-        case POST_USER_ACTION:
+        case CLOSE_SUCCESS_MESSAGE_ACTION:
             return {
                 ...state,
-                userList: payload.userList,
-                csvServerRespons: payload.csvServerRespons
+                success: false
             }
-        case POST_SINGLE_USER_ACTION:
-            return {
-                ...state,
-                singleServerRespons: payload.singleServerRespons
-            }
-        case POST_ADMIN_ACTION:
-            return state
         default:
             return state
     }

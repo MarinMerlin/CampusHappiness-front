@@ -1,52 +1,142 @@
 import React, { Component } from 'react';
-
-import './ManageUser.css';
-import Adder from './Adder';
-import AdminAdder from './AdminAdder';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import Adder from './Adder';
+import { connect } from 'react-redux';
+import { postUsers, closeSuccessMessage } from '../../../../redux/admin/actions/manageUserAction';
+import UserTable from './UserTable';
 
-const styles = {
-  card: {
-    minWidth: 275,
-    margin: 50,
+
+const itemStyle = {
+  width: '100vw',
+  backgroundColor: 'grey'
+}
+
+const initialState = {
+  singleUser: {
+    firstName: '',
+    lastName: '',
+    email: '',
+    pseudo: '',
+    password: '',
+    admin: false
   },
-};
+  userList: []
+}
+
 class ManageUser extends Component {
-  constructor(props){
-    super()
+
+  state=initialState
+
+  uploadUserList = (csvData)=>{
+    const userList = []
+    csvData.forEach(csvLine => {
+      userList.push({
+        email: csvLine[0],
+        firstName: csvLine[1],
+        lastName: csvLine[2],
+        pseudo: csvLine[1],
+        password: csvLine[1],
+        admin: false
+      })
+    });
+    this.setState({userList: userList})
+  }
+
+  onKeyPress = (event)=>{
+    if (event.target.name === "firstName") {
+      this.setState({
+        singleUser: Object.assign(
+          {},
+          this.state.singleUser,
+          {
+            firstName: event.target.value,
+            pseudo: event.target.value,
+            password: event.target.value
+          })
+      })
+    }
+    if (event.target.name === "lastName") {
+      this.setState({
+        singleUser: Object.assign({}, this.state.singleUser, {lastName: event.target.value})
+      })
+    }
+    if (event.target.name === "email") {
+      this.setState({
+        singleUser: Object.assign({}, this.state.singleUser, {email: event.target.value})
+      })
+    }
+  }
+
+  adminCheckBox = ()=>{
+    this.setState({
+      singleUser: Object.assign(
+        {},
+        this.state.singleUser,
+        { 
+          admin: !this.state.singleUser.admin
+        }
+      )
+    })
+  }
+
+  singlePost = ()=>{
+    this.props.postUsers([this.state.singleUser])
+  }
+
+  csvPost = ()=>{
+    this.props.postUsers(this.state.userList)  
+  }
+
+  closeSuccessMessage = ()=>{
+    this.props.closeSuccessMessage()
   }
 
   render() {
-    const { classes } = this.props;
     return (
-      <div>
-        <Grid
-          container
-          justify="center"
-          alignItems="center"
-        >
-          <Grid item>
-          <Card className={classes.card}>
-            <CardContent>
-            <Typography variant="headline" component="h2">Admin page</Typography>
-              <AdminAdder/>
-              <Adder/>
-            </CardContent>
-          </Card>
-          </Grid>
+      <Grid
+        container
+        direction= 'column'
+        justify= 'center'
+        alignItems= 'center'
+        style={{
+          backgroundColor: '#2c3e50',
+          minHeight: '100vh',
+          width: '100vw'
+        }}
+      >
+        <Grid item style={itemStyle} >
+          <h2>Manage User</h2>
+        </Grid>
+        <Grid item style={itemStyle} >
+          <Adder 
+            uploadUserList={this.uploadUserList} 
+            onKeyPress={this.onKeyPress} 
+            adminCheckBox={this.adminCheckBox}
+            singlePost={this.singlePost}
+            csvPost={this.csvPost}
+            checkBoxState={this.state.singleUser.admin}
+            firstName = {this.state.singleUser.firstName}
+            lastName = {this.lastName}
+            email = {this.state.singleUser.email}
+            openSnackBar = {this.props.success}
+            closeMessage = {this.closeSuccessMessage}
+          />
+        </Grid>
+        <Grid item style={itemStyle}>
+          <UserTable/>
+        </Grid>
       </Grid>
-      </div>
     );
   }
 }
 
-ManageUser.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+const mapStateToProps = state=>{
+  return state.manageUser
+}
 
-export default withStyles(styles)(ManageUser);
+const mapActionsToProps = {
+  postUsers: postUsers,
+  closeSuccessMessage: closeSuccessMessage
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(ManageUser)
