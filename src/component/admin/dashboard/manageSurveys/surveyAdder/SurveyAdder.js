@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Paper, Typography, Grid } from '@material-ui/core';
+import { Paper, Typography, Grid, Snackbar } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -35,7 +35,8 @@ class SurveyAdder extends Component {
         missingQuestionText: true,
         missingQuestionKeyWord: true,
         noThematique: true,
-        thematiqueWithoutQuestion: true
+        thematiqueWithoutQuestion: true,
+        showSnackbar: false
     }
 
     changeSurveyName = (e)=>{
@@ -129,7 +130,8 @@ class SurveyAdder extends Component {
                 this.setState({ open: true });
             }
             else{
-                this.props.postSurvey(survey, this.props.sondageList)
+                this.props.postSurvey(survey, this.props.sondageList);
+                this.setState({ showSnackbar: true});
             }
         })
     }
@@ -140,6 +142,7 @@ class SurveyAdder extends Component {
 
     render(){
         return(
+            <div>
             <Paper style={{marginTop:'4vh', padding:'2vh'}} >
                 <Dialog
                     open={this.state.open}
@@ -193,6 +196,13 @@ class SurveyAdder extends Component {
                     </Grid>
                 </Grid>
             </Paper>
+            <Snackbar
+                    open={this.state.showSnackbar}
+                    message="New sondage succesfully submitted!"
+                    autoHideDuration={6000}
+                    onClose={() => { this.setState({ showSnackbar: false }); }}
+                />
+            </div>
         )
     }
 }

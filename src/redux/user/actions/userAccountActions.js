@@ -50,6 +50,7 @@ export function updateAccount(data) {
                 password: data.value
             }
         } 
+        default:
 
     }
 }
