@@ -33,13 +33,13 @@ class QuestionsFrom extends React.Component {
                             answers={this.props.answers}
                             handleChange={this.props.handleChange}
                         />
-                        <Grid item>
-                            <AnswerButtons
+                    </Grid>
+                    <div style={{position: 'fixed', right: '3em', bottom: '3em'}}>
+                        <AnswerButtons
                                 alreadyAnswered={this.props.alreadyAnswered}
                                 handleChange={this.props.handleChange}
                             />
-                        </Grid>
-                    </Grid>
+                </div>
                 </form>
                 <Snackbar
                     open={this.state.showSnackbar}
