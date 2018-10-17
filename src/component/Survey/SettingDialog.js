@@ -12,7 +12,7 @@ class SettingDialog extends React.Component {
         this.state = { open: false, min: 1, max: 31, inputMailIntensity: 1, showSnackbar: false, snackbarMessage: "Success" };
     }
 
-    showDialog = (open) => event => {
+    showDialog = (open) => () => {
         this.setState({ open: open });
     }
 

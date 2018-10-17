@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {
-    Typography, Grid, Paper, TextField, Radio, Button, Snackbar
+import { Grid, Paper, TextField, Radio, Button, Snackbar
 } from '@material-ui/core';
 
 import { Link, Element } from 'react-scroll';
@@ -25,9 +24,6 @@ class QuestionsFrom extends React.Component {
         }
         return (
             <div>
-                <Typography variant="h6" align="center" gutterBottom color="textPrimary">
-                    Sondage {this.props.sondageName}
-                </Typography>
                 <form onSubmit={this.props.handleChange({ type: 'submit' }, this.validate)}>
                     <Grid container direction="column">
                         <Thematiques
@@ -95,7 +91,7 @@ function Thematiques(props) {
                 {
                     props.thematiqueList.map(theme => (
                         <Grid item style={{ margin: 50 }} key={"Grid" + theme.id}>
-                            <Paper style={{ padding: 10, backgroundColor: '#ecf0f1' }} elevation={0} key={"Paper" + theme.id}>
+                            <Paper style={{ padding: 10, backgroundColor: '#ecf0f1' }} elevation={2} key={"Paper" + theme.id}>
                                 <h1 style={{ alignContent: 'center' }}> {theme.name} </h1>
                                 <QuestionArea
                                     key={"Question" + theme.id}
@@ -188,7 +184,7 @@ function Choices(props) {
     return(
         <div>
         <Element name={props.questionNumber}>
-        <Link to={props.questionNumber+1} smooth={true} duration={500} offset={-250}>
+        <Link to={props.questionNumber+1} smooth={true} duration={500} offset={-500}>
         {choices.map(choice => (
             <label key={"label"+choice.id} style={{padding: 20, fontStyle: 'italic'}}>
             {choice.label}
@@ -216,7 +212,6 @@ const mapActionToProps = {
 
 const mapStateToprops = (state) => ({
     loaded: state.userSurvey.loaded,
-    sondageName: state.userSurvey.sondageName,
     comments: state.userSurvey.comments,
     answers: state.userSurvey.answers,
     alreadyAnswered: state.userSurvey.alreadyAnswered,

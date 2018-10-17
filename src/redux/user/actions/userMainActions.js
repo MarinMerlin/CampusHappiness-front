@@ -13,11 +13,16 @@ export function toggleDrawer(open) {
     }
 }
 
-export function switchPage(page) {
-    return {
+
+const switchPage = (page, next = () => {}) => (dispatch) => {
+    dispatch({
         type: SWITCH_PAGE_ACTION,
         payload: {
             page: page
         }
-    }
+    });
+    next();
 }
+
+export { switchPage };
+
