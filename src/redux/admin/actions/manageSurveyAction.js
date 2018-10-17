@@ -3,7 +3,9 @@ import id_generator from '../../../customFunction/idGenerator'
 
 import { 
     GET_SONDAGE_DATA_ACTION,
+    GET_GROUP_DATA_ACTION,
     CHANGE_SONDAGE_SELECTION_ACTION ,
+    CHANGE_GROUP_SELECTION_ACTION,
     POST_SURVEY_ACTION,
     GET_KEYWORDS_ACTION
 } from "./adminTypes";
@@ -13,11 +15,6 @@ const getSondageData = ()=>(dispatch)=> {
     .then( res => {
         const sondage_list = res.data
         let currentSondage = sondage_list[0]
-        sondage_list.forEach((sondage) => {
-            if(sondage.current){
-                currentSondage = sondage
-            }
-        });
         dispatch({
             type: GET_SONDAGE_DATA_ACTION,
             payload: {
@@ -25,6 +22,23 @@ const getSondageData = ()=>(dispatch)=> {
                 loaded: true,
                 currentSondage: currentSondage,
                 selectedSondage: currentSondage,
+            }
+        })
+    });
+}
+
+const getGroupData = ()=>(dispatch)=> {
+    axios.get("http://localhost:4200/admin/getGroups")
+    .then( res => {
+        const group_list = res.data
+        let currentGroup = group_list[0]
+        dispatch({
+            type: GET_GROUP_DATA_ACTION,
+            payload: {
+                groupList: group_list,
+                loaded: true,
+                currentGroup: currentGroup,
+                selectedGroup: currentGroup,
             }
         })
     });
@@ -61,6 +75,13 @@ const changeSondageSelection = (sondage)=>(dispatch)=>{
     })
 }
 
+const changeGroupSelection = (group)=>(dispatch)=>{
+    dispatch({
+        type: CHANGE_GROUP_SELECTION_ACTION,
+        payload: {selectedGroup: group}
+    })
+}
+
 const postSurvey = (survey, sondageList)=>(dispatch)=>{
     axios.post("http://localhost:4200/admin/postSondage",survey).then((serverRes)=>{
         if (serverRes.data) {
@@ -87,4 +108,4 @@ const postSurvey = (survey, sondageList)=>(dispatch)=>{
 }
 
 
-export { getSondageData, changeSondageSelection, postSurvey, getKeywordList, addKeyword }
+export { getSondageData, getGroupData, changeSondageSelection, changeGroupSelection, postSurvey, getKeywordList, addKeyword }
