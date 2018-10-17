@@ -1,6 +1,7 @@
 import { 
     POST_USERS_ACTION, 
-    CLOSE_SUCCESS_MESSAGE_ACTION
+    CLOSE_SUCCESS_MESSAGE_ACTION,
+    GET_ALL_USERS_ACTION
 } from '../actions/adminTypes';
 
 const manageUserReducer = function(state = null, {type, payload}){
@@ -14,6 +15,11 @@ const manageUserReducer = function(state = null, {type, payload}){
             return {
                 ...state,
                 success: false
+            }
+        case GET_ALL_USERS_ACTION:
+            return {
+                ...state,
+                userArray: payload.userArray
             }
         default:
             return state

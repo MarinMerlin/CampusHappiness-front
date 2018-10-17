@@ -10,7 +10,6 @@ let serverUrl = env.serverUrl;
 
 // Cette action récupèr le sondage de l'utilisateur
 const getSurvey = (token) => (dispatch) => {
-    console.log("Getting the fucking survey");
     axios.get(serverUrl+'/survey/getSondage', { headers: { Authorization: "bearer " + token } })
     .then( (res) => {
         let answers = makeAnswerMap(res.data);
@@ -35,6 +34,7 @@ const getSurvey = (token) => (dispatch) => {
                 errorMessage: "Le serveur a rencontré une erreur au cours du chargement du sondage",
             }
         })
+        
     });
 }
 

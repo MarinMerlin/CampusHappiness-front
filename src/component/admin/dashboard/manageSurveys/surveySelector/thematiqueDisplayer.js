@@ -10,7 +10,6 @@ const ThematiqueDisplayer = ({thematique}) => {
             question.question = question.text
         }
     });
-    console.log(thematique.questionList)
     return (
         <Card style={{backgroundColor: '#ecf0f1', margin: '1vh', padding: '1vh'}} >
             <Typography style={titleStyle} >

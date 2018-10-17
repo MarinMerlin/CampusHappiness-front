@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Adder from './Adder';
 import { connect } from 'react-redux';
-import { postUsers, closeSuccessMessage } from '../../../../redux/admin/actions/manageUserAction';
+import { postUsers, closeSuccessMessage, getAllUsers } from '../../../../redux/admin/actions/manageUserAction';
 import UserTable from './UserTable';
 
 
 const itemStyle = {
   width: '100vw',
-  backgroundColor: 'grey'
 }
 
 const initialState = {
@@ -18,14 +17,20 @@ const initialState = {
     email: '',
     pseudo: '',
     password: '',
-    admin: false
+    admin: false,
   },
-  userList: []
+  userList: [],
+  page: 0,
+  rowsPerPage: 10
 }
 
 class ManageUser extends Component {
 
   state=initialState
+
+  componentDidMount() {
+    this.props.getAllUsers()
+  }
 
   uploadUserList = (csvData)=>{
     const userList = []
@@ -91,6 +96,14 @@ class ManageUser extends Component {
     this.props.closeSuccessMessage()
   }
 
+  handleChangePage = (event, page) => {
+    this.setState({ page });
+  };
+
+  handleChangeRowsPerPage = event => {
+    this.setState({ rowsPerPage: event.target.value });
+  };
+
   render() {
     return (
       <Grid
@@ -101,12 +114,9 @@ class ManageUser extends Component {
         style={{
           backgroundColor: '#2c3e50',
           minHeight: '100vh',
-          width: '100vw'
+          width: '100vw',
         }}
       >
-        <Grid item style={itemStyle} >
-          <h2>Manage User</h2>
-        </Grid>
         <Grid item style={itemStyle} >
           <Adder 
             uploadUserList={this.uploadUserList} 
@@ -123,7 +133,13 @@ class ManageUser extends Component {
           />
         </Grid>
         <Grid item style={itemStyle}>
-          <UserTable/>
+          {this.props.userArray && <UserTable 
+            page={this.state.page} 
+            handleChangePage= {this.handleChangePage}
+            userArray = {this.props.userArray}
+            rowsPerPage = {this.state.rowsPerPage}
+            handleChangeRowsPerPage = {this.handleChangeRowsPerPage}
+          />}
         </Grid>
       </Grid>
     );
@@ -136,7 +152,8 @@ const mapStateToProps = state=>{
 
 const mapActionsToProps = {
   postUsers: postUsers,
-  closeSuccessMessage: closeSuccessMessage
+  closeSuccessMessage: closeSuccessMessage,
+  getAllUsers: getAllUsers
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(ManageUser)
