@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { Paper, Typography, Grid, Button } from '@material-ui/core';
+import { Paper, Card, Typography, Grid, Button } from '@material-ui/core';
+import { ArrowRightAltRounded } from '@material-ui/icons';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import axios from 'axios';
 import SurveyDisplayer from './SurveyDisplayer';
 
 import { connect } from 'react-redux';
-import { changeSondageSelection } from '../../../../../redux/admin/actions/manageSurveyAction'
+import { changeSondageSelection, changeGroupSelection } from '../../../../../redux/admin/actions/manageSurveyAction'
 
 const titleStyle = { fontFamily: 'Roboto', fontSize: '2.5em', color: '#2c3e50', fontWeight: 100, textAlign:'center'}
 
@@ -22,10 +23,24 @@ class SurveySelector extends Component {
         return newSelectedSondage
     }
 
+    getGroupById = (groupId)=>{
+        let newSelectedGroup = this.props.groupList[0]
+        this.props.groupList.forEach(group => {
+            if (groupId === group.id) {
+                newSelectedGroup = group
+            }
+        });
+        return newSelectedGroup
+    }
+
     changeSondageSelection = (e)=>{
-        console.log('selection')
         console.log(e.target.value)
         this.props.changeSondageSelection(this.getSondageById(e.target.value))
+    }
+
+    changeGroupSelection = (e)=>{
+        console.log(e.target.value)
+        this.props.changeGroupSelection(this.getGroupById(e.target.value))
     }
 
     handleClick = (e) => {
@@ -42,16 +57,43 @@ class SurveySelector extends Component {
         return(
             <Paper style={{padding: '2vh'}} >
                 <Typography style={titleStyle} > Select the next sondage </Typography>
-                <Select
-                    value={this.props.selectedSondage.id}
-                    onClick= {this.refreshSelection}
-                    onChange={this.changeSondageSelection}
-                >
-                    {this.props.sondageList.map(sondage=>(
-                        <MenuItem key={sondage.id} value={sondage.id} >{sondage.name}</MenuItem>
-                    ))}
-                </Select>
-                <SurveyDisplayer sondage={this.props.selectedSondage} />
+                <Grid container justify="space-between">
+                    <Grid item>
+                        <Select
+                            value={this.props.selectedSondage.id}
+                            onClick= {this.refreshSelection}
+                            onChange={this.changeSondageSelection}
+                        >
+                            {this.props.sondageList.map(sondage=>(
+                                <MenuItem key={sondage.id} value={sondage.id} >{sondage.name}</MenuItem>
+                            ))}
+                        </Select>
+                    </Grid>
+                    <Grid item>
+                        <Select
+                            value={this.props.selectedGroup.id}
+                            onClick= {this.refreshSelection}
+                            onChange={this.changeGroupSelection}
+                        >
+                            {this.props.groupList.map(group=>(
+                                <MenuItem key={group.id} value={group.id} >{group.name}</MenuItem>
+                            ))}
+                        </Select>
+                    </Grid>
+                </Grid>
+                <Grid container alignItems="center" justify="space-between">
+                    <Grid item sm={7}>
+                        <SurveyDisplayer sondage={this.props.selectedSondage} />
+                    </Grid>
+                    <Grid item sm={1}>
+                        <ArrowRightAltRounded style={{width:100, height:100}}/>
+                    </Grid>
+                    <Grid item md={4}>
+                        <Card style={{margin:'2vh'}}>
+                            <Typography variant="h6" style={{margin:20}} > {this.props.selectedGroup.name} </Typography>
+                        </Card>
+                    </Grid>
+                </Grid>    
                 <Grid
                     container
                     direction="row"
@@ -74,7 +116,8 @@ const mapStateToProps = state=>{
 }
 
 const mapActionsToProps = {
-    changeSondageSelection: changeSondageSelection
+    changeSondageSelection: changeSondageSelection,
+    changeGroupSelection: changeGroupSelection
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(SurveySelector)
