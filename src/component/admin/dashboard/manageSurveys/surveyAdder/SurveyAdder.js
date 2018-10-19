@@ -107,7 +107,7 @@ class SurveyAdder extends Component {
                 thematiqueWithoutQuestion = true
             }
             let newThematique = { name:  mappedThematique.name, questionList:[]}
-            mappedThematique.questionMap.forEach(question=>{
+            mappedThematique.questionMap.forEach(question => {
                 if (!missingQuestionText && question.text.length===0) {
                     missingQuestionText=true
                 }
@@ -115,6 +115,9 @@ class SurveyAdder extends Component {
                     missingQuestionKeyWord=true
                 }
                 newThematique.questionList.push(question)
+                // ----- tests ----------
+                console.log("question :", question);
+                question.choices = [{ value: 1, text: 'satisfait' }, { value: 0, text: 'indifférent'}, { value: -1, text: 'insatisfait'}];
             })
             survey.thematiqueList.push(newThematique)
         })
