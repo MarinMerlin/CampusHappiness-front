@@ -36,8 +36,7 @@ const initialState = {
         todaySatis: 0,
         monthSatis: [],
         weekRate: [],
-        loadedSondage: false,
-        loadedGroup: false,
+        loaded: false,
         data: [],
     },
     specificSurvey: {
@@ -52,7 +51,8 @@ const initialState = {
         groupList: [],
         currentSondage: null,
         currentGroup: null,
-        loaded: false,
+        loadedSondage: false,
+        loadedGroup: false,
         selectedSondage: {},
         selectedGroup: {},
         keywordList: null,
@@ -78,7 +78,10 @@ const initialState = {
     },
     manageUser: {
         success: null,
-        userArray: null
+        userArray: null,
+        successGroup: null,
+        successUpdate: null,
+        selectedUsers: null,
     }
 };
 

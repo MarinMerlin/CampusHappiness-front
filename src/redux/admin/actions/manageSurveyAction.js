@@ -82,6 +82,13 @@ const changeGroupSelection = (group)=>(dispatch)=>{
     })
 }
 
+const changeGroupSondage = (sondage_id, group_id) => (dispatch) => {
+    axios.post("http://localhost:4200/admin/changeNextSondage", {sondage_id: sondage_id, group_id: group_id})
+    .then((res) => {
+        console.log(res.data)
+    })
+}
+
 const postSurvey = (survey, sondageList)=>(dispatch)=>{
     axios.post("http://localhost:4200/admin/postSondage",survey).then((serverRes)=>{
         if (serverRes.data) {
@@ -108,4 +115,4 @@ const postSurvey = (survey, sondageList)=>(dispatch)=>{
 }
 
 
-export { getSondageData, getGroupData, changeSondageSelection, changeGroupSelection, postSurvey, getKeywordList, addKeyword }
+export { getSondageData, getGroupData, changeSondageSelection, changeGroupSelection, changeGroupSondage, postSurvey, getKeywordList, addKeyword }

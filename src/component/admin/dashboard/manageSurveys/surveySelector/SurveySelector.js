@@ -7,7 +7,7 @@ import axios from 'axios';
 import SurveyDisplayer from './SurveyDisplayer';
 
 import { connect } from 'react-redux';
-import { changeSondageSelection, changeGroupSelection } from '../../../../../redux/admin/actions/manageSurveyAction'
+import { changeSondageSelection, changeGroupSelection, changeGroupSondage } from '../../../../../redux/admin/actions/manageSurveyAction'
 
 const titleStyle = { fontFamily: 'Roboto', fontSize: '2.5em', color: '#2c3e50', fontWeight: 100, textAlign:'center'}
 
@@ -43,10 +43,8 @@ class SurveySelector extends Component {
         this.props.changeGroupSelection(this.getGroupById(e.target.value))
     }
 
-    handleClick = (e) => {
-        axios.post("http://localhost:4200/admin/changeNextSondage",this.props.selectedSondage).then((res)=>{
-            console.log(res);
-        });
+    handleClick = () => {
+        this.props.changeGroupSondage(this.props.selectedSondage.id,this.props.selectedGroup.id)
     }
 
     refreshSelection = ()=>{
@@ -117,7 +115,8 @@ const mapStateToProps = state=>{
 
 const mapActionsToProps = {
     changeSondageSelection: changeSondageSelection,
-    changeGroupSelection: changeGroupSelection
+    changeGroupSelection: changeGroupSelection,
+    changeGroupSondage: changeGroupSondage
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(SurveySelector)
