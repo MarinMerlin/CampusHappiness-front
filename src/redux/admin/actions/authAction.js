@@ -4,7 +4,6 @@ import {
     LOGIN_ACTION, 
     CHANGE_PASSWORD_ACTION, 
     CHANGE_PSEUDO_ACTION,
-    SHOW_PASSWORD_ACTION,
     CHANGE_DASHBOARD_PAGE_ACTION,
     LOGOUT_ACTION
 } from "./adminTypes";
@@ -87,13 +86,6 @@ const login = (pseudo, password)=> (dispatch)=>{
     })
 }
 
-const showPassword = (previousBooleanShowPassword)=>(dispatch)=>{
-    dispatch({
-        type: SHOW_PASSWORD_ACTION,
-        payload: {booleanShowPassword: !previousBooleanShowPassword}
-    })
-}
-
 const changeAdminPage = (pageNumber)=>(dispatch)=>{
     dispatch({
         type: CHANGE_DASHBOARD_PAGE_ACTION,
@@ -111,4 +103,4 @@ const logout = ()=>(dispatch)=>{
     });
 }
 
-export { changePassword, changePseudo, login, showPassword, changeAdminPage, logout, checkLogin }
+export { changePassword, changePseudo, login, changeAdminPage, logout, checkLogin }

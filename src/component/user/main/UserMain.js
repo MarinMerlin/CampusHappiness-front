@@ -26,7 +26,7 @@ const styles = theme => ({
         color:'#2c3e50'
     },
     firstDivStyle :{
-         padding:'3vh', 
+         padding:0, 
          backgroundColor:'#2c3e50', 
          minHeight:"100vh",
     },
@@ -98,7 +98,6 @@ class UserMain extends Component {
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
     return (
-        <div>
       <div className={classes.root}>
         <AppBar position='sticky' className={classes.appBar} >
             <Toolbar>
@@ -188,7 +187,6 @@ class UserMain extends Component {
             {this.props.selectedPage === 3 && <Account/> }
             {this.state.redirectAdmin && <Redirect to="/admin" /> }
         </div>
-      </div>
       </div>
     )
   }

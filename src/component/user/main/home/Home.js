@@ -1,23 +1,25 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import PostDisplayer from './PostDisplayer';
+import Axios from 'axios';
 
-export class Home extends Component {
+class Home extends Component {
 
+  state={
+    posts: null
+  }
+
+  componentDidMount(){
+    Axios.get('http://localhost:4200/admin/getPosts').then(res=>{
+      this.setState({posts: res.data})
+    })
+  }
   render() {
     return (
       <div>
-        Home
+        {this.state.posts ? <PostDisplayer postList={this.state.posts}/>:<p>Chargement...</p>}
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => ({
-  
-})
-
-const mapDispatchToProps = {
-  
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default Home

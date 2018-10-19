@@ -52,6 +52,7 @@ const initialState = {
         loaded: false,
         selectedSondage: {},
         keywordList: null,
+        openPostMessage: false
     },
     userSurvey: {
         loaded: false,

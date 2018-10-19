@@ -5,7 +5,8 @@ import {
     GET_SONDAGE_DATA_ACTION,
     CHANGE_SONDAGE_SELECTION_ACTION ,
     POST_SURVEY_ACTION,
-    GET_KEYWORDS_ACTION
+    GET_KEYWORDS_ACTION,
+    CLOSE_POSTMESSAGE_ACTION
 } from "./adminTypes";
 
 const getSondageData = ()=>(dispatch)=> {
@@ -86,5 +87,12 @@ const postSurvey = (survey, sondageList)=>(dispatch)=>{
     })
 }
 
-
-export { getSondageData, changeSondageSelection, postSurvey, getKeywordList, addKeyword }
+const closePostMessage = ()=>(dispatch)=>{
+    dispatch({
+        type: CLOSE_POSTMESSAGE_ACTION,
+        payload: {
+            openPostMessage: false
+        }
+    })
+}
+export { getSondageData, changeSondageSelection, postSurvey, getKeywordList, addKeyword, closePostMessage }

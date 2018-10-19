@@ -8,13 +8,18 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import idGenerator from '../../../../../customFunction/idGenerator'
 import ThematiqueAdder from './ThematiqueAdder';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
 import { connect } from 'react-redux';
-import { postSurvey } from '../../../../../redux/admin/actions/manageSurveyAction';
+import { postSurvey, closePostMessage } from '../../../../../redux/admin/actions/manageSurveyAction';
 
 // juste pour pas avoir les warning unused
-if (Link && Element && Events && scrollSpy && scroller) {}
+if (Link && Element && Events && scrollSpy && scroller) {
+    console.log('imported')
+}
 
 const titleStyle = { fontFamily: 'Roboto', fontSize: '2.5em', color: '#2c3e50', fontWeight: 100, textAlign:'center'}
 const messageMissingSurveyName = "missing the survey name"
@@ -35,7 +40,7 @@ class SurveyAdder extends Component {
         missingQuestionText: true,
         missingQuestionKeyWord: true,
         noThematique: true,
-        thematiqueWithoutQuestion: true
+        thematiqueWithoutQuestion: true,
     }
 
     changeSurveyName = (e)=>{
@@ -192,6 +197,28 @@ class SurveyAdder extends Component {
                         </Button>
                     </Grid>
                 </Grid>
+                <Snackbar
+            anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+            }}
+            open={this.props.openPostMessage}
+            onClose={this.props.closePostMessage}
+            ContentProps={{
+                'aria-describedby': 'message-id',
+            }}
+            message={<span id="sucess">Survey Added</span>}
+            action={[
+            <IconButton
+            key="close"
+            aria-label="Close"
+            color="inherit"
+            onClick={this.props.closePostMessage}
+            >
+            <CloseIcon />
+            </IconButton>,
+            ]}
+            />
             </Paper>
         )
     }
@@ -202,7 +229,8 @@ const mapStateToProps = state=>{
 }
 
 const mapActionsToProps = {
-    postSurvey: postSurvey
+    postSurvey: postSurvey,
+    closePostMessage: closePostMessage
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(SurveyAdder)

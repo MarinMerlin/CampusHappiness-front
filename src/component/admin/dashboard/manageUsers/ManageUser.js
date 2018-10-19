@@ -4,6 +4,8 @@ import Adder from './Adder';
 import { connect } from 'react-redux';
 import { postUsers, closeSuccessMessage, getAllUsers } from '../../../../redux/admin/actions/manageUserAction';
 import UserTable from './UserTable';
+import PostWriter from './PostWriter';
+import Axios from 'axios';
 
 
 const itemStyle = {
@@ -21,7 +23,12 @@ const initialState = {
   },
   userList: [],
   page: 0,
-  rowsPerPage: 10
+  rowsPerPage: 10,
+  imageURL: 'https://images.unsplash.com/photo-1504465039710-0f49c0a47eb7?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=2a9b2c6e54342b63487ce461a5ee9872&auto=format&fit=crop&w=675&q=80',
+  title: '',
+  text: '',
+  linkURL: '',
+  openSnackBar: false
 }
 
 class ManageUser extends Component {
@@ -104,7 +111,47 @@ class ManageUser extends Component {
     this.setState({ rowsPerPage: event.target.value });
   };
 
+  onChange = (event)=>{
+    switch (event.target.id) {
+        case 'imageURL':
+            this.setState({imageURL: event.target.value})
+            break;
+        case 'title':
+            this.setState({title: event.target.value})
+            break;
+        case 'text':
+            this.setState({text: event.target.value})
+            break;
+        case 'linkURL':
+            this.setState({linkURL: event.target.value})
+            break;
+        default:
+            break;
+    }
+  }
+
+  postNews = ()=>{
+      const post = {
+          imageURL: this.state.imageURL,
+          title: this.state.title,
+          text: this.state.text,
+          linkURL: this.state.linkURL
+      }
+      Axios.post('http://localhost:4200/admin/addPost', {post: post}).then(res=>{
+          if (res.data.success) {
+              console.log('open snck')
+              this.setState({openSnackBar: true})
+          }
+      })
+  }
+
+  closeSnackBar = ()=>{
+      this.setState({openSnackBar: false})
+  }
+
   render() {
+    const {imageURL, title, text, linkURL} = this.state
+    const post = {imageURL: imageURL, title: title, text: text, linkURL}
     return (
       <Grid
         container
@@ -141,6 +188,13 @@ class ManageUser extends Component {
             handleChangeRowsPerPage = {this.handleChangeRowsPerPage}
           />}
         </Grid>
+        <PostWriter 
+          post={post} 
+          openSnackBar={this.state.openSnackBar} 
+          closeSnackBar={this.closeSnackBar} 
+          onChange={this.onChange} 
+          postNews={this.postNews} 
+        />
       </Grid>
     );
   }
