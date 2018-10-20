@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Paper, Typography, Grid } from '@material-ui/core';
+import { Paper, Typography, Grid, Snackbar } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -8,7 +8,6 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import idGenerator from '../../../../../customFunction/idGenerator'
 import ThematiqueAdder from './ThematiqueAdder';
-import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
@@ -41,6 +40,7 @@ class SurveyAdder extends Component {
         missingQuestionKeyWord: true,
         noThematique: true,
         thematiqueWithoutQuestion: true,
+        showSnackbar: false
     }
 
     changeSurveyName = (e)=>{
@@ -111,7 +111,7 @@ class SurveyAdder extends Component {
                 thematiqueWithoutQuestion = true
             }
             let newThematique = { name:  mappedThematique.name, questionList:[]}
-            mappedThematique.questionMap.forEach(question=>{
+            mappedThematique.questionMap.forEach(question => {
                 if (!missingQuestionText && question.text.length===0) {
                     missingQuestionText=true
                 }
@@ -119,6 +119,9 @@ class SurveyAdder extends Component {
                     missingQuestionKeyWord=true
                 }
                 newThematique.questionList.push(question)
+                // ----- tests ----------
+                console.log("question :", question);
+                question.choices = [{ value: 1, text: 'satisfait' }, { value: 0, text: 'indifférent'}, { value: -1, text: 'insatisfait'}];
             })
             survey.thematiqueList.push(newThematique)
         })
@@ -134,7 +137,8 @@ class SurveyAdder extends Component {
                 this.setState({ open: true });
             }
             else{
-                this.props.postSurvey(survey, this.props.sondageList)
+                this.props.postSurvey(survey, this.props.sondageList);
+                this.setState({ showSnackbar: true});
             }
         })
     }
@@ -145,6 +149,7 @@ class SurveyAdder extends Component {
 
     render(){
         return(
+            <div>
             <Paper style={{marginTop:'4vh', padding:'2vh'}} >
                 <Dialog
                     open={this.state.open}
@@ -220,6 +225,13 @@ class SurveyAdder extends Component {
             ]}
             />
             </Paper>
+            <Snackbar
+                    open={this.state.showSnackbar}
+                    message="New sondage succesfully submitted!"
+                    autoHideDuration={6000}
+                    onClose={() => { this.setState({ showSnackbar: false }); }}
+                />
+            </div>
         )
     }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Grid, Card, Typography, withStyles, Menu, Button, FormControl, InputLabel, MenuItem, Select, OutlinedInput } from '@material-ui/core';
+import { Grid, Card, Typography, withStyles, Menu, Button, MenuItem } from '@material-ui/core';
 import { KeyboardArrowDownRounded } from '@material-ui/icons';
 import { getUserStat, changeStat } from '../../../../redux/user/actions/userStatActions';
 import LongSoftLine from '../../../admin/dashboard/chartDisplayers/LongSoftLine';

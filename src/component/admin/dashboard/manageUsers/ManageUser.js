@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
 import Adder from './Adder';
+import GroupAdder from './GroupAdder';
 import { connect } from 'react-redux';
-import { postUsers, closeSuccessMessage, getAllUsers } from '../../../../redux/admin/actions/manageUserAction';
+import { postUsers, checkUser, postGroup, closeSuccessMessage, getAllUsers, changeUserGroup } from '../../../../redux/admin/actions/manageUserAction';
+import { getGroupData, changeGroupSelection } from '../../../../redux/admin/actions/manageSurveyAction';
 import UserTable from './UserTable';
 import PostWriter from './PostWriter';
 import Axios from 'axios';
+import SelectedUsers from './SelectedUsers';
 
 
 const itemStyle = {
@@ -21,6 +29,7 @@ const initialState = {
     password: '',
     admin: false,
   },
+  groupName: '',
   userList: [],
   page: 0,
   rowsPerPage: 10,
@@ -28,7 +37,8 @@ const initialState = {
   title: '',
   text: '',
   linkURL: '',
-  openSnackBar: false
+  openSnackBar: false,
+  incorrectEmailAlert: false,
 }
 
 class ManageUser extends Component {
@@ -36,7 +46,8 @@ class ManageUser extends Component {
   state=initialState
 
   componentDidMount() {
-    this.props.getAllUsers()
+    this.props.getAllUsers();
+    this.props.getGroupData();
   }
 
   uploadUserList = (csvData)=>{
@@ -77,6 +88,11 @@ class ManageUser extends Component {
         singleUser: Object.assign({}, this.state.singleUser, {email: event.target.value})
       })
     }
+    if (event.target.name === "name") {
+      this.setState({
+        groupName: event.target.value,
+      })
+    }
   }
 
   adminCheckBox = ()=>{
@@ -92,7 +108,15 @@ class ManageUser extends Component {
   }
 
   singlePost = ()=>{
-    this.props.postUsers([this.state.singleUser])
+    if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(this.state.singleUser.email) || /^[a-zA-Z0-9]+\.[A-Za-z]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(this.state.singleUser.email)) { 
+      this.props.postUsers([this.state.singleUser])
+    } else {
+      this.setState({incorrectEmailAlert: true})
+    }
+  }
+
+  groupPost = ()=>{
+    this.props.postGroup(this.state.groupName)
   }
 
   csvPost = ()=>{
@@ -146,13 +170,40 @@ class ManageUser extends Component {
   }
 
   closeSnackBar = ()=>{
-      this.setState({openSnackBar: false})
+    this.setState({openSnackBar: false})
+  }
+  handleCheck = (event) => {
+    console.log(event.target.checked);
+    this.props.checkUser(event.target.value, event.target.checked)
+  }
+
+  getGroupById = (groupId)=>{
+    let newSelectedGroup = this.props.group.groupList[0]
+    this.props.group.groupList.forEach(group => {
+        if (groupId === group.id) {
+            newSelectedGroup = group
+        }
+    });
+    return newSelectedGroup
+  }
+
+  changeUserGroup = () => {
+      this.props.changeUserGroup(this.props.user.selectedUsers, this.props.group.selectedGroup)
+  }
+
+  changeGroupSelection = (e)=>{
+      this.props.changeGroupSelection(this.getGroupById(e.target.value))
+  }
+
+  handleCloseAlert = () => {
+    this.setState({ incorrectEmailAlert: false });
   }
 
   render() {
     const {imageURL, title, text, linkURL} = this.state
     const post = {imageURL: imageURL, title: title, text: text, linkURL}
     return (
+      <div>
       <Grid
         container
         direction= 'column'
@@ -175,17 +226,37 @@ class ManageUser extends Component {
             firstName = {this.state.singleUser.firstName}
             lastName = {this.lastName}
             email = {this.state.singleUser.email}
-            openSnackBar = {this.props.success}
+            openSnackBar = {this.props.user.success}
+            closeMessage = {this.closeSuccessMessage}
+          />
+        </Grid>
+        <Grid item style={itemStyle} >
+          <GroupAdder 
+            onKeyPress={this.onKeyPress} 
+            groupPost={this.groupPost}
+            name = {this.state.groupName}
+            openSnackBar = {this.props.user.successGroup}
             closeMessage = {this.closeSuccessMessage}
           />
         </Grid>
         <Grid item style={itemStyle}>
-          {this.props.userArray && <UserTable 
+          {this.props.user.userArray && <UserTable 
             page={this.state.page} 
             handleChangePage= {this.handleChangePage}
-            userArray = {this.props.userArray}
+            userArray = {this.props.user.userArray}
             rowsPerPage = {this.state.rowsPerPage}
             handleChangeRowsPerPage = {this.handleChangeRowsPerPage}
+            handleCheck = {this.handleCheck}
+          />}
+        </Grid>
+        <Grid item style={itemStyle}>
+          {this.props.group.loadedGroup && <SelectedUsers 
+          changeUserGroup = {this.changeUserGroup}
+          changeGroupSelection = {this.changeGroupSelection}
+          selectedGroup = {this.props.group.selectedGroup}
+          groupList = {this.props.group.groupList}
+          openSnackBar = {this.props.user.successUpdate}
+          closeMessage = {this.closeSuccessMessage}
           />}
         </Grid>
         <PostWriter 
@@ -196,18 +267,44 @@ class ManageUser extends Component {
           postNews={this.postNews} 
         />
       </Grid>
+      <Dialog
+        open={this.state.incorrectEmailAlert}
+        onClose={this.handleCloseAlert}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Please enter a correct email address
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleCloseAlert} color="primary" autoFocus>
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
     );
   }
 }
 
 const mapStateToProps = state=>{
-  return state.manageUser
+  return {
+    user: state.manageUser,
+    group: state.manageSurvey,
+  }
 }
 
 const mapActionsToProps = {
   postUsers: postUsers,
   closeSuccessMessage: closeSuccessMessage,
-  getAllUsers: getAllUsers
+  getAllUsers: getAllUsers,
+  postGroup: postGroup,
+  checkUser: checkUser,
+  getGroupData: getGroupData,
+  changeGroupSelection: changeGroupSelection,
+  changeUserGroup: changeUserGroup,
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(ManageUser)

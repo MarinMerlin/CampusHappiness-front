@@ -10,7 +10,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
-import Input from '@material-ui/core/Input';
 import { updateAccount, sendUpdate, updatePhoto } from '../../../../redux/user/actions/userAccountActions';
 
 const styles = theme => ({

@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Typography, Grid, withStyles, Paper } from '@material-ui/core';
+import { Grid, withStyles, Paper } from '@material-ui/core';
 
 import ErrorBanner from './ErrorBanner';
 import Loading from './Loading';
 import QuestionsForm from './QuestionsForm';
 import SettingDialog from './SettingDialog';
+import RedirectToUser from './RedirectToUser';
 
 import { getSurvey, readUrlToken, getToken } from '../../redux/user/actions/userSurveyActions';
 
@@ -16,6 +17,7 @@ const styles = theme => ({
     paper: {
         margin: theme.spacing.unit,
         padding: theme.spacing.unit * 2,
+        backgroundColor: '#2c3e50',
     }
 });
 
@@ -24,8 +26,6 @@ class Survey extends React.Component {
     constructor(props) {
         super(props);
 
-        console.log("token :", props.token);
-        console.log("isConnected :", props.isConnected);
         // On récupère un token si l'utilisateur est connecté et qu'il n'en a pas 
         if (!props.token) {
             if (props.isConnected) {
@@ -50,20 +50,30 @@ class Survey extends React.Component {
             headDisplay = <Loading />;
         }
         else {
-            headDisplay = <Typography variant="h5" align="center" color="textPrimary" gutterBottom> Bonjour {this.props.firstName} </Typography>
+            //headDisplay = <Typography variant="display2" align="center" color="textSecondary" gutterBottom> Bonjour {this.props.firstName} </Typography>
+            headDisplay = null;
         }
         return (
-            <div>
+            <div className={this.props.classes.root}>
                 {this.props.error ?
                     (headDisplay = <ErrorBanner message={this.props.errorMessage} />)
                     : (
                         <Grid container direction='column'>
                             <Grid item>
-                                <SettingDialog />
+                                <Grid container justify="space-between">
+                                    <Grid item>
+                                    <SettingDialog />
+                                    </Grid>
+                                    <Grid item>
+                                    {!this.props.isConnected && <RedirectToUser />}
+                                    </Grid>
+                                </Grid>
+                                
+                <h1 style={{color: 'white', fontFamily: 'Roboto', textAlign: 'center'}}> Sondage {this.props.sondageName} </h1>
                             </Grid>
                             <Grid item>
 
-                                <Paper className={this.props.classes.paper}>
+                                <Paper className={this.props.classes.paper} elevation={0}>
                                     {headDisplay}
                                     <QuestionsForm />
                                 </Paper>
@@ -85,13 +95,12 @@ const mapActionToProps = {
 
 const mapStateToProps = (state) => ({
 
-    userSurvey: state.userSurvey,
     token: state.userSurvey.token,
     loaded: state.userSurvey.loaded,
     firstName: state.userSurvey.firstName,
     error: state.userSurvey.error,
     errorMessage: state.userSurvey.errorMessage,
-
+    sondageName: state.userSurvey.sondageName,
     isConnected: state.auth.isConnected,
 
 });

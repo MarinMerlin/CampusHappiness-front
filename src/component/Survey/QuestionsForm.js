@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {
-    Typography, Grid, Paper, TextField, FormGroup, FormControlLabel, Radio, Button, Snackbar
+import { Grid, Paper, TextField, Radio, Button, Snackbar
 } from '@material-ui/core';
+
+import { Link, Element } from 'react-scroll';
 
 import { handleChange } from "../../redux/user/actions/userSurveyActions";
 
@@ -23,9 +24,6 @@ class QuestionsFrom extends React.Component {
         }
         return (
             <div>
-                <Typography variant="h6" align="center" gutterBottom color="textPrimary">
-                    Sondage {this.props.sondageName}
-                </Typography>
                 <form onSubmit={this.props.handleChange({ type: 'submit' }, this.validate)}>
                     <Grid container direction="column">
                         <Thematiques
@@ -35,13 +33,13 @@ class QuestionsFrom extends React.Component {
                             answers={this.props.answers}
                             handleChange={this.props.handleChange}
                         />
-                        <Grid item>
-                            <AnswerButtons
+                    </Grid>
+                    <div style={{position: 'fixed', right: '3em', bottom: '3em'}}>
+                        <AnswerButtons
                                 alreadyAnswered={this.props.alreadyAnswered}
                                 handleChange={this.props.handleChange}
                             />
-                        </Grid>
-                    </Grid>
+                </div>
                 </form>
                 <Snackbar
                     open={this.state.showSnackbar}
@@ -83,13 +81,17 @@ function AnswerButtons(props) {
 }
 
 function Thematiques(props) {
+    var questionStartingCount = 0;
+    const questionsStartingCountUpdate = (nbr) => {
+        questionStartingCount += nbr;
+    }
     return (
-        <div>
+        <div style={{ fontFamily: 'Roboto' }}>
             <ul>
                 {
                     props.thematiqueList.map(theme => (
                         <Grid item style={{ margin: 50 }} key={"Grid" + theme.id}>
-                            <Paper style={{ padding: 10, backgroundColor: '#ecf0f1' }} elevation={0} key={"Paper" + theme.id}>
+                            <Paper style={{ padding: 10, backgroundColor: '#ecf0f1' }} elevation={2} key={"Paper" + theme.id}>
                                 <h1 style={{ alignContent: 'center' }}> {theme.name} </h1>
                                 <QuestionArea
                                     key={"Question" + theme.id}
@@ -97,7 +99,9 @@ function Thematiques(props) {
                                     answers={props.answers}
                                     alreadyAnswered={props.alreadyAnswered}
                                     handleChange={props.handleChange}
+                                    questionStartingCount={questionStartingCount}
                                 />
+                                {questionsStartingCountUpdate(theme.questionList.length)}
                                 <CommentArea
                                     key={"Comment" + theme.id}
                                     theme={theme}
@@ -132,6 +136,10 @@ function CommentArea(props) {
 }
 
 function QuestionArea(props) {
+    var questionNumber = props.questionStartingCount;
+    const increment = () => {
+        questionNumber++;
+    }
     return (
         <ul>
             {props.questions.map(question => (
@@ -143,7 +151,9 @@ function QuestionArea(props) {
                         answers={props.answers}
                         handleChange={props.handleChange}
                         alreadyAnswered={props.alreadyAnswered}
+                        questionNumber={questionNumber}
                     />
+                    {increment()}
                 </div>
             ))}
         </ul>
@@ -170,36 +180,11 @@ function Choices(props) {
             },
         ];
     }
-    /*
-    return (
-        <FormGroup row>
-            <Grid container justify="center" direction="row">
-                <ul style={{display: "inline"}}>
-                    {choices.map(choice => (
-                        <li style={{display: "inline"}} key={"li" + choice.id}>
-                        <Grid item key={"item" + choice.id}>
-                            <FormControlLabel
-                                key={"FormControle" + choice.id}
-                                disabled={props.alreadyAnswered}
-                                label={choice.label}
-                                control={
-                                    <Radio
-                                        key={"Radio" + choice.id}
-                                        color={choice.color}
-                                        checked={props.answers.get(props.question.id) === choice.value}
-                                        onChange={props.handleChange({ id: props.question.id, type: "radioButton", value: choice.value })}
-                                    />
-                                }
-                            />
-                        </Grid>
-                        </li>
-                    ))}
-                </ul>
-            </Grid>
-        </FormGroup>
-    );*/
+
     return(
         <div>
+        <Element name={props.questionNumber}>
+        <Link to={props.questionNumber+1} smooth={true} duration={500} offset={-500}>
         {choices.map(choice => (
             <label key={"label"+choice.id} style={{padding: 20, fontStyle: 'italic'}}>
             {choice.label}
@@ -214,6 +199,8 @@ function Choices(props) {
         )
         )
         }
+        </Link>
+        </Element>
         </div>
 
     )
@@ -225,7 +212,6 @@ const mapActionToProps = {
 
 const mapStateToprops = (state) => ({
     loaded: state.userSurvey.loaded,
-    sondageName: state.userSurvey.sondageName,
     comments: state.userSurvey.comments,
     answers: state.userSurvey.answers,
     alreadyAnswered: state.userSurvey.alreadyAnswered,

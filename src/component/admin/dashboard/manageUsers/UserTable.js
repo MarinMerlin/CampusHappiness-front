@@ -4,17 +4,18 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { Card } from '@material-ui/core';
+import { Card, Checkbox } from '@material-ui/core';
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 
-const UserTable = ({page, handleChangePage, userArray, rowsPerPage, handleChangeRowsPerPage}) => {
+const UserTable = ({page, handleChangePage, userArray, rowsPerPage, handleChangeRowsPerPage, handleCheck}) => {
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, userArray.length - page * rowsPerPage);
     return (
     <Card style={{width: '96vw', margin: 'auto', marginTop: '3vh', marginBottom:'3vh'}} >
         <Table>
             <TableHead>
                 <TableRow>
+                    <TableCell>Select</TableCell>
                     <TableCell>First Name</TableCell>
                     <TableCell>Last Name</TableCell>
                     <TableCell>Email</TableCell>
@@ -25,6 +26,14 @@ const UserTable = ({page, handleChangePage, userArray, rowsPerPage, handleChange
                 {userArray.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(user => {
                     return (
                     <TableRow key={user.id} hover={true}>
+                        <TableCell component="th" scope="row">
+                            <Checkbox
+                                checked={user.checked}
+                                onChange={handleCheck}
+                                value={user.id}
+                                color="primary"
+                            />
+                        </TableCell>
                         <TableCell component="th" scope="row">
                             {user.firstName}
                         </TableCell>

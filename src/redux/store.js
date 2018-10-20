@@ -48,9 +48,13 @@ const initialState = {
     },
     manageSurvey: {
         sondageList: [],
+        groupList: [],
         currentSondage: null,
-        loaded: false,
+        currentGroup: null,
+        loadedSondage: false,
+        loadedGroup: false,
         selectedSondage: {},
+        selectedGroup: {},
         keywordList: null,
         openPostMessage: false
     },
@@ -75,7 +79,10 @@ const initialState = {
     },
     manageUser: {
         success: null,
-        userArray: null
+        userArray: null,
+        successGroup: null,
+        successUpdate: null,
+        selectedUsers: null,
     }
 };
 
