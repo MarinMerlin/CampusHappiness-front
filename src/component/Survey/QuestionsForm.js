@@ -87,11 +87,11 @@ function Thematiques(props) {
     }
     return (
         <div style={{ fontFamily: 'Roboto' }}>
-            <ul>
+            <ul style= {{ padding: 0 }}>
                 {
                     props.thematiqueList.map(theme => (
-                        <Grid item style={{ margin: 50 }} key={"Grid" + theme.id}>
-                            <Paper style={{ padding: 10, backgroundColor: '#ecf0f1' }} elevation={2} key={"Paper" + theme.id}>
+                        <Grid item style={{ margin: '2VW', marginBottom: '1VH', }} key={"Grid" + theme.id}>
+                            <Paper style={{ padding: '1VW' , backgroundColor: '#ecf0f1' }} elevation={2} key={"Paper" + theme.id}>
                                 <h1 style={{ alignContent: 'center' }}> {theme.name} </h1>
                                 <QuestionArea
                                     key={"Question" + theme.id}
