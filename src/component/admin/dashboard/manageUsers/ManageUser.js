@@ -9,7 +9,7 @@ import Adder from './Adder';
 import GroupAdder from './GroupAdder';
 import { connect } from 'react-redux';
 import { postUsers, checkUser, postGroup, closeSuccessMessage, getAllUsers, changeUserGroup } from '../../../../redux/admin/actions/manageUserAction';
-import { getGroupData, changeGroupSelection } from '../../../../redux/admin/actions/manageSurveyAction';
+import { changeGroupSelection } from '../../../../redux/admin/actions/manageSurveyAction';
 import UserTable from './UserTable';
 import PostWriter from './PostWriter';
 import Axios from 'axios';
@@ -47,7 +47,6 @@ class ManageUser extends Component {
 
   componentDidMount() {
     this.props.getAllUsers();
-    this.props.getGroupData();
   }
 
   uploadUserList = (csvData)=>{
@@ -302,7 +301,6 @@ const mapActionsToProps = {
   getAllUsers: getAllUsers,
   postGroup: postGroup,
   checkUser: checkUser,
-  getGroupData: getGroupData,
   changeGroupSelection: changeGroupSelection,
   changeUserGroup: changeUserGroup,
 }

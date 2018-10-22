@@ -1,6 +1,6 @@
 
 const cycleWeek = function(){
-    const week = ['dimanche','lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
+    const week = ['Sunday','Monday', 'Tuesady', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const plop = new Date(Date.now());
     const day = plop.getDay();
     let sortedWeek =[];

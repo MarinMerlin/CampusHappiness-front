@@ -11,6 +11,7 @@ import SurveyManager from './manageSurveys/ManageSurveys';
 
 import { connect } from 'react-redux';
 import { changeAdminPage, logout } from '../../../redux/admin/actions/authAction'
+import { getGroupData } from '../../../redux/admin/actions/manageSurveyAction';
 
 
 const labelStyle = {
@@ -32,6 +33,10 @@ class AdminMain extends React.Component{
         redirectUser: false
       };
     
+      componentDidMount(){
+        this.props.getGroupData();
+    }
+
       handlePopoverOpen = event => {
         this.setState({ anchorEl: event.currentTarget });
       };
@@ -134,7 +139,8 @@ const mapStateToProps = state=>{
 
 const mapActionsToProps = {
     changePage: changeAdminPage,
-    onLogout: logout
+    onLogout: logout,
+    getGroupData: getGroupData,
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(withStyles(styles)(AdminMain))
