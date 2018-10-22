@@ -3,7 +3,6 @@ import { Paper, Card, Typography, Grid, Button } from '@material-ui/core';
 import { ArrowRightAltRounded } from '@material-ui/icons';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import axios from 'axios';
 import SurveyDisplayer from './SurveyDisplayer';
 
 import { connect } from 'react-redux';

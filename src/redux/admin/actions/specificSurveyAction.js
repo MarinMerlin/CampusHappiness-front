@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import { GET_SPECIFIC_SURVEY_ACTION } from "./adminTypes";
 
-const handleDateChange = (moment)=>(dispatch)=> {
+const handleDateChange = (moment, group_id)=>(dispatch)=> {
     const date = moment._d
     let day = date.getDate();
     let month = date.getMonth() + 1;
@@ -18,7 +18,7 @@ const handleDateChange = (moment)=>(dispatch)=> {
     .then( res => {
         const comments = res.data;
         const loaded = true
-        axios.get(`http://localhost:4200/admin/specificStatistics/${year}/${month}/${day}`)
+        axios.get(`http://localhost:4200/admin/specificStatistics/${year}/${month}/${day}/${group_id}` )
         .then( res => {
             dispatch({
                 type: GET_SPECIFIC_SURVEY_ACTION,
