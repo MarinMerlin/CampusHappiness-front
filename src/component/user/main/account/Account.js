@@ -14,9 +14,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { updateAccount, sendUpdate, updatePhoto } from '../../../../redux/user/actions/userAccountActions';
 
 const styles = theme => ({
-  root: {
-    margin: theme.spacing.unit,
-  },
   title: {
     margin: theme.spacing.unit,
     paddingTop: theme.spacing.unit,
@@ -25,14 +22,7 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: 200,
-  },
-  card: {
-    margin: theme.spacing.unit,
-  },
-  media: {
-    height: 150,
-    width: 150
-  },
+  }
 });
 export class Account extends Component {
 
@@ -65,7 +55,7 @@ export class Account extends Component {
     const { classes } = this.props;
     return (
       <div>
-        <Paper className={classes.root} elevation={1}>
+        <Paper elevation={1} style={{margin: '3vw', marginTop: '15vh', padding: '2vw'}} >
           <div className={classes.title}>
             <Typography variant="title" >
               Welcome to your account page
@@ -78,13 +68,13 @@ export class Account extends Component {
             alignItems="flex-start"
             className={classes.card}
           >
-            <Grid item sm={4}>
-              <Toolbar>
-                <Card className={classes.card}>
+            <Grid item sm={4} >
+              <Toolbar style={{padding:0, marginTop:'2vh', marginBottom:'2vh'}} >
+                <Card style={{width: '20vw', height:'40vh'}} >
                   <CardMedia
                     image= {`http://localhost:4200${this.props.user.photo}`}
                     title="Profile photo"
-                    className={classes.media}
+                    style={{width: '100%', height: '80%', margin:0}}
                   />
                   <CardActions>
                       <input
@@ -170,7 +160,7 @@ export class Account extends Component {
               </Toolbar>
             </Grid>
             <Grid item>
-              <Button className={classes.root} variant="raised" size="small" color="primary" onClick={this.onSubmitChange}>
+              <Button variant="raised" size="small" color="primary" onClick={this.onSubmitChange} >
                 Submit
               </Button>
             </Grid>

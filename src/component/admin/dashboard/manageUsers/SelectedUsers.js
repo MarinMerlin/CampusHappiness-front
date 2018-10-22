@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Select, MenuItem, Grid, Typography, Button, Snackbar, IconButton } from '@material-ui/core';
+import { Card, Select, MenuItem, Grid, Button, Snackbar, IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 const SelectedUsers = ({ 
     changeUserGroup, 
@@ -11,8 +11,8 @@ const SelectedUsers = ({
 
     return (
       <div>
-        <Card style={{width: '96vw', margin: 'auto', marginTop: '3vh', marginBottom: '3vh'}} >
-            <Typography align="center" variant="h3" style={{margin: 20}}>Add selected users to a group</Typography>
+        <Card style={{width: '96vw', margin: 'auto', marginBottom: '5vh'}} >
+        <h2 style={{textAlign: 'center', fontFamily: 'Roboto', fontWeight:100, fontSize:'3em', color: '#2c3e50', marginBottom:0}}>Change User Group</h2>
             <Grid container justify="center">
                 <Grid item>
                     <Select

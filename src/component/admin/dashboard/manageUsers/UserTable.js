@@ -11,7 +11,8 @@ import TablePagination from '@material-ui/core/TablePagination';
 const UserTable = ({page, handleChangePage, userArray, rowsPerPage, handleChangeRowsPerPage, handleCheck}) => {
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, userArray.length - page * rowsPerPage);
     return (
-    <Card style={{width: '96vw', margin: 'auto', marginTop: '3vh', marginBottom:'3vh'}} >
+    <Card style={{width: '96vw', margin: 'auto', marginTop: '3vh', marginBottom:'1vh'}} >
+    <h2 style={{textAlign: 'center', fontFamily: 'Roboto', fontWeight:100, fontSize:'3em', color: '#2c3e50', marginTop: '3vh', marginBottom: '3vh'}}>User Table</h2>
         <Table>
             <TableHead>
                 <TableRow>
