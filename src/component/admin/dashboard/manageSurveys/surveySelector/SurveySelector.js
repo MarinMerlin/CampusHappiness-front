@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Paper, Card, Typography, Grid, Button } from '@material-ui/core';
-import { ArrowRightAltRounded } from '@material-ui/icons';
+import { Paper, Grid, Button } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import SurveyDisplayer from './SurveyDisplayer';
@@ -51,44 +50,40 @@ class SurveySelector extends Component {
     render(){
         return(
             <Paper style={{padding: '2vh'}} >
-                <Typography style={titleStyle} > Select the next sondage </Typography>
+                <h2 style={titleStyle} > Select the next sondage </h2>
                 <Grid container justify="space-between">
-                    <Grid item>
-                        <Select
-                            value={this.props.selectedSondage.id}
-                            onClick= {this.refreshSelection}
-                            onChange={this.changeSondageSelection}
-                        >
-                            {this.props.sondageList.map(sondage=>(
-                                <MenuItem key={sondage.id} value={sondage.id} >{sondage.name}</MenuItem>
-                            ))}
-                        </Select>
-                    </Grid>
-                    <Grid item>
-                        <Select
-                            value={this.props.selectedGroup.id}
-                            onClick= {this.refreshSelection}
-                            onChange={this.changeGroupSelection}
-                        >
-                            {this.props.groupList.map(group=>(
-                                <MenuItem key={group.id} value={group.id} >{group.name}</MenuItem>
-                            ))}
-                        </Select>
+                    <Grid container justify='flex-start' alignItems='center' spacing={32} >
+                        <Grid item >
+                            <h3 style={{fontFamily: 'Roboto', fontSize: '1.5em', color: '#2c3e50', fontWeight: 100, textAlign:'center'}}>Survey : </h3>
+                        </Grid>
+                        <Grid item >
+                            <Select
+                                value={this.props.selectedSondage.id}
+                                onClick= {this.refreshSelection}
+                                onChange={this.changeSondageSelection}
+                            >
+                                {this.props.sondageList.map(sondage=>(
+                                    <MenuItem key={sondage.id} value={sondage.id} >{sondage.name}</MenuItem>
+                                ))}
+                            </Select>
+                        </Grid>
+                        <Grid item >
+                            <h3 style={{fontFamily: 'Roboto', fontSize: '1.5em', color: '#2c3e50', fontWeight: 100, textAlign:'center'}}>Group : </h3>
+                        </Grid>
+                        <Grid item>
+                            <Select
+                                value={this.props.selectedGroup.id}
+                                onClick= {this.refreshSelection}
+                                onChange={this.changeGroupSelection}
+                            >
+                                {this.props.groupList.map(group=>(
+                                    <MenuItem key={group.id} value={group.id} >{group.name}</MenuItem>
+                                ))}
+                            </Select>
+                        </Grid>
                     </Grid>
                 </Grid>
-                <Grid container alignItems="center" justify="space-between">
-                    <Grid item sm={7}>
-                        <SurveyDisplayer sondage={this.props.selectedSondage} />
-                    </Grid>
-                    <Grid item sm={1}>
-                        <ArrowRightAltRounded style={{width:100, height:100}}/>
-                    </Grid>
-                    <Grid item md={4}>
-                        <Card style={{margin:'2vh'}}>
-                            <Typography variant="h6" style={{margin:20}} > {this.props.selectedGroup.name} </Typography>
-                        </Card>
-                    </Grid>
-                </Grid>    
+                <SurveyDisplayer sondage={this.props.selectedSondage} />
                 <Grid
                     container
                     direction="row"

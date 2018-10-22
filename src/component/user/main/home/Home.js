@@ -9,7 +9,7 @@ class Home extends Component {
   }
 
   componentDidMount(){
-    Axios.get('http://localhost:4200/admin/getPosts').then(res=>{
+    Axios.get('http://localhost:4200/user/getPosts').then(res=>{
       this.setState({posts: res.data})
     })
   }

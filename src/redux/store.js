@@ -83,6 +83,7 @@ const initialState = {
         successGroup: null,
         successUpdate: null,
         selectedUsers: null,
+        userToLoad: false
     }
 };
 
