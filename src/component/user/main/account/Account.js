@@ -11,7 +11,9 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import Snackbar from '@material-ui/core/Snackbar';
-import { updateAccount, sendUpdate, updatePhoto } from '../../../../redux/user/actions/userAccountActions';
+
+import env from '../../../../const';
+import { updateAccount, sendUpdate, updatePhoto, photoRetrieved } from '../../../../redux/user/actions/userAccountActions';
 
 const styles = theme => ({
   title: {
@@ -28,8 +30,12 @@ export class Account extends Component {
 
   constructor(props){
     super(props)
-    this.state = { showSnackbar: false, snackbarMessage: "Success" };
+    this.state = { showSnackbar: false, snackbarMessage: "Success", image: env.serverUrl + "/user/photo/default.jpg"};
     this.updatePhoto = this.updatePhoto.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({ image: env.serverUrl + this.props.user.photo });
   }
 
   handleKeyPress = (e)=>{
@@ -57,6 +63,12 @@ export class Account extends Component {
 
   render() {
     const { classes } = this.props;
+    
+    if (this.props.user.photoToRetrieve) {
+      this.setState({ image: env.serverUrl + this.props.user.photo });
+      this.forceUpdate();
+      this.props.photoRetrieved();
+    }
     return (
       <div>
         <Paper elevation={1} style={{margin: '3vw', marginTop: '15vh', padding: '2vw'}} >
@@ -76,7 +88,7 @@ export class Account extends Component {
               <Toolbar style={{padding:0, marginTop:'2vh', marginBottom:'2vh'}} >
                 <Card style={{width: '20vw', height:'40vh'}} >
                   <CardMedia
-                    image= {`http://localhost:4200${this.props.user.photo}`}
+                    image= {this.state.image}
                     title="Profile photo"
                     style={{width: '100%', height: '80%', margin:0}}
                   />
@@ -189,6 +201,7 @@ const mapDispatchToProps = {
   onUpdateUser : updateAccount,
   submitChange : sendUpdate,
   updatePhoto : updatePhoto,
+  photoRetrieved: photoRetrieved,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Account))
