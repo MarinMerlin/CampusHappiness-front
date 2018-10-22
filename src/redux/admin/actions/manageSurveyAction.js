@@ -60,13 +60,16 @@ const getKeywordList = () => (dispatch) => {
 const addKeyword = (newKeyword) => (dispatch) => {
     axios.post("http://localhost:4200/admin/addKeyWord", {name: newKeyword})
         .then(res => {
+            console.log("add keyword action")
+            console.log(res.data)
             dispatch({  
                 type: GET_KEYWORDS_ACTION,
                 payload: {
                     list: res.data,
                 }
             })
-        });
+        }
+    );
 }
 
 const changeSondageSelection = (sondage)=>(dispatch)=>{
