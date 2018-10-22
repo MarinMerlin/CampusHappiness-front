@@ -10,9 +10,11 @@ import {
 const manageUserReducer = function(state = null, {type, payload}){
     switch (type) {
         case POST_USERS_ACTION:
+            console.log(payload.userArray)
             return {
                 ...state,
-                success: payload.success
+                success: payload.success,
+                userArray: payload.userArray
             }
         case POST_GROUP_ACTION:
             return {

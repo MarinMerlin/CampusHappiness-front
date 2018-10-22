@@ -13,7 +13,8 @@ const postUsers  = (userList)=>(dispatch)=>{
         dispatch({
             type: POST_USERS_ACTION,
             payload: {
-                success: res.data.success
+                success: res.data.success,
+                userArray: res.data.userArray
             }
         })
     })
@@ -21,12 +22,15 @@ const postUsers  = (userList)=>(dispatch)=>{
 
 const postGroup  = (groupName)=>(dispatch)=>{
     axios.post("http://localhost:4200/admin/postGroup", {groupName: groupName}).then(res=>{
-        dispatch({
-            type: POST_GROUP_ACTION,
-            payload: {
-                success: res.data.success
-            }
-        })
+        if (res.data.data.success) {
+            dispatch({
+                type: POST_GROUP_ACTION,
+                payload: {
+                    success: res.data.success,
+                    userArray: res.data.userArray
+                }
+            })
+        }
     })
 }
 
@@ -47,7 +51,7 @@ const getAllUsers = ()=>(dispatch)=>{
             type: GET_ALL_USERS_ACTION,
             payload: {
                 userArray: res.data,
-                selectedUsers: selectedUsers
+                selectedUsers: selectedUsers,
             }
         });
     })
