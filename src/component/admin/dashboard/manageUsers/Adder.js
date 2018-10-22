@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import CSVReader from 'react-csv-reader'
-import { Card, Typography } from '@material-ui/core';
+import { Card } from '@material-ui/core';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
@@ -39,7 +39,7 @@ const Adder = ({
 
     return (
         <Card style={{width: '96vw', margin: 'auto', marginTop: '3vh'}} >
-            <Typography align="center" variant="h3" style={{margin: 20}}>Add user</Typography>
+            <h2 style={{textAlign: 'center', fontFamily: 'Roboto', fontWeight:100, fontSize:'3em', color: '#2c3e50', marginBottom:0}}>Add user</h2>
             <Grid 
                 container 
                 direction='row' 

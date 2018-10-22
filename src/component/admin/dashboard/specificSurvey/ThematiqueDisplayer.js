@@ -3,6 +3,10 @@ import { Paper, Typography } from '@material-ui/core';
 import SoftRadar from '../chartDisplayers/SoftRadar';
 
 const ThematiqueDisplayer = ({thematique}) => {
+    console.log(thematique)
+    thematique.questionList.forEach(question=>{
+        question.avg = Math.round(question.avg*100)/100
+    })
     // regroup by keyWord
     let keyWordMap = new Map();
     thematique.questionList.forEach(question => {

@@ -2,7 +2,7 @@ import React from 'react'
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import {Card,Typography} from '@material-ui/core';
+import {Card} from '@material-ui/core';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
@@ -22,7 +22,7 @@ const GroupAdder = ({
 
     return (
         <Card style={{width: '96vw', margin: 'auto', marginTop: '3vh'}} >
-            <Typography align="center" variant="h3" style={{margin: 20}}>Add group</Typography>
+            <h2 style={{textAlign: 'center', fontFamily: 'Roboto', fontWeight:100, fontSize:'3em', color: '#2c3e50', marginBottom:0}}>Add Group</h2>
             <Grid 
                 container 
                 direction='row' 
