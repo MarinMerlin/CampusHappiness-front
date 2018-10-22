@@ -23,7 +23,6 @@ function PostWriter({post, postNews, onChange, closeSnackBar, openSnackBar}) {
                 color: 'white',
                 fontWeight: '100',
                 fontSize:'4em',
-                backgroundImage:'url(https://images.unsplash.com/photo-1505506874110-6a7a69069a08?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0e7207ff5062fea921df59767ca430f&auto=format&fit=crop&w=634&q=80)'
             }} >
                 News & Survey Feedback
             </h2>

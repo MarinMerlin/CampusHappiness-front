@@ -57,7 +57,7 @@ export class Stat extends Component {
     const open = Boolean(anchorEl);
     return (
       <div>
-        <Card>
+        <Card style={{margin: '2vw', marginTop: '10vh', padding: '1vw'}} >
           <Grid container className={classes.title}>
             <Grid item>
               <Typography variant='h3' align='center'>

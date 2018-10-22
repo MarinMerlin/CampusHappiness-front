@@ -29,6 +29,7 @@ const styles = theme => ({
          padding:0, 
          backgroundColor:'#2c3e50', 
          minHeight:"100vh",
+         border: '1px #2c3e50 solid'
     },
     root: {
         flexGrow: 1,
