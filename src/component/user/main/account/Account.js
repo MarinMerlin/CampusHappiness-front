@@ -138,7 +138,7 @@ export class Account extends Component {
                   <Grid item>
                     <TextField
                       id="standard-name"
-                      label="Pseudo"
+                      label="Username"
                       name="pseudo"
                       className={classes.textField}
                       onChange={this.handleKeyPress}

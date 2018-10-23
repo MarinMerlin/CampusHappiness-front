@@ -6,7 +6,7 @@ function Loading(props) {
     return( 
       <div style={{position: 'relative'}}>
     <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
-    Chargement du sondage
+    Loading survey
     </Typography>
     <CircularProgress color="primary" size={300} thickness={7} style={{marginLeft: '30%'}} />
     </div>

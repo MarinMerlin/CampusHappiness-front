@@ -106,9 +106,9 @@ class AdminMain extends React.Component{
                         <Grid item sm={9} >
                             <Tabs value={value} onChange={this.handleChange} fullWidth style={{marginTop:'10px'}} >
                                 <Tab label="General Statistics" style={labelStyle} />
-                                <Tab label="Sepecific Survey" style={labelStyle} />
+                                <Tab label="Specific Survey" style={labelStyle} />
                                 <Tab label="Create & Manage Survey" style={labelStyle} />
-                                <Tab label="Manage Users" style={labelStyle} />
+                                <Tab label="Manage Database" style={labelStyle} />
                             </Tabs>
                         </Grid>
                         <Grid item sm={1} >

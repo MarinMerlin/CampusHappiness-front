@@ -50,7 +50,7 @@ class SurveySelector extends Component {
     render(){
         return(
             <Paper style={{padding: '2vh'}} >
-                <h2 style={titleStyle} > Select the next sondage </h2>
+                <h2 style={titleStyle} > Select the next survey </h2>
                 <Grid container justify="space-between">
                     <Grid container justify='flex-start' alignItems='center' spacing={32} >
                         <Grid item >

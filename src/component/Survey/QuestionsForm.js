@@ -170,13 +170,13 @@ function Choices(props) {
     else {
         choices = [
             {
-                id: 0, label: 'Satisfait', value: 1, color: 'primary'
+                id: 0, label: 'Satisfied', value: 1, color: 'primary'
             },
             {
-                id: 1, label: 'Indifférent', value: 0, color: 'default'
+                id: 1, label: 'Indiffirent', value: 0, color: 'default'
             },
             {
-                id: 2, label: 'Insatisfait', value: -1, color: 'secondary'
+                id: 2, label: 'Unsatisfied', value: -1, color: 'secondary'
             },
         ];
     }

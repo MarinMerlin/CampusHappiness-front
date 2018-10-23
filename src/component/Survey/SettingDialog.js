@@ -48,7 +48,7 @@ class SettingDialog extends React.Component {
                 style={{margin: 20, backgroundColor: '#4286f4'}} onClick={this.showDialog(true)}
                 disabled={!this.props.mailIntensityLoaded}
                 >
-                  <Icon>settings</Icon> Fréquence Mail
+                  <Icon>settings</Icon> Mail Frequency
                 </Button>
                 <Dialog open={this.state.open} onClose={this.showDialog(false)}>
                     <DialogTitle><Icon>account_circle</Icon> {this.props.firstName} {this.props.lastName} </DialogTitle>
@@ -57,7 +57,7 @@ class SettingDialog extends React.Component {
                         {this.props.mailIntensityError ? <Typography variant="h6" color="secondary"> {this.props.mailIntensityError} </Typography>
                         :
                         <TextField
-                        label="Jours entre 2 mails ?"
+                        label="Days between two emails ?"
                         type="number"
                         value={this.state.inputMailIntensity}
                         onChange={this.selectNumber()}
@@ -67,7 +67,7 @@ class SettingDialog extends React.Component {
 
                     <DialogActions>
                         <Button color="primary" onClick={this.props.postMailIntensity(this.state.inputMailIntensity, this.props.token, this.props.user_id, this.validate)}>OK</Button>
-                        <Button color="secondary" onClick={this.showDialog(false)} >Annuler</Button>
+                        <Button color="secondary" onClick={this.showDialog(false)} >Cancel</Button>
                     </DialogActions>
                 </Dialog>
                 <Snackbar 

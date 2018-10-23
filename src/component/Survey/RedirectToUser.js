@@ -26,7 +26,7 @@ class RedirectToUser extends Component {
             style={{margin: 20, backgroundColor: '#4286f4'}} 
             variant="contained" 
             onClick={this.handleClick}> 
-            <AccountCircle /> Page utilisateur 
+            <AccountCircle /> User page 
         </Button>
         {this.state.redirect && <Redirect to="/user" />}
       </div>
