@@ -1,4 +1,4 @@
-import { GET_SONDAGE_DATA_ACTION, GET_GROUP_DATA_ACTION, CHANGE_SONDAGE_SELECTION_ACTION, CHANGE_GROUP_SELECTION_ACTION, POST_SURVEY_ACTION, GET_KEYWORDS_ACTION, CLOSE_POSTMESSAGE_ACTION } from '../actions/adminTypes';
+import { GET_SONDAGE_DATA_ACTION, GET_GROUP_DATA_ACTION, CHANGE_SONDAGE_SELECTION_ACTION, CHANGE_GROUP_SELECTION_ACTION, POST_SURVEY_ACTION, GET_KEYWORDS_ACTION, CLOSE_POSTMESSAGE_ACTION, OPEN_SURVEY_MESSAGE_ACTION, CLOSE_SURVEY_MESSAGE_ACTION } from '../actions/adminTypes';
 
 const manageSurveyReducer = function(state = null, {type, payload}){
     switch (type) {
@@ -43,6 +43,18 @@ const manageSurveyReducer = function(state = null, {type, payload}){
             return {
                 ...state,
                 openPostMessage: false
+            }
+        case OPEN_SURVEY_MESSAGE_ACTION:
+            return {
+                ...state,
+                openSurveyMessage: true,
+                surveyMessage: payload.message
+            }
+        case CLOSE_SURVEY_MESSAGE_ACTION:
+            return {
+                ...state,
+                openSurveyMessage: payload.closingStatue,
+                surveyMessage: payload.message
             }
         default:
             return state

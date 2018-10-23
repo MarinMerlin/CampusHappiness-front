@@ -56,6 +56,8 @@ const initialState = {
         selectedSondage: {},
         selectedGroup: {},
         keywordList: null,
+        surveyMessage: '',
+        openSurveyMessage: false,
         openPostMessage: false
     },
     userSurvey: {
@@ -76,6 +78,7 @@ const initialState = {
         mailIntensity: null,
         mailIntensityLoaded: false,
         mailIntensityError: null,
+        openSnackBar: false
     },
     manageUser: {
         success: null,

@@ -8,7 +8,9 @@ import {
     CHANGE_GROUP_SELECTION_ACTION,
     POST_SURVEY_ACTION,
     GET_KEYWORDS_ACTION,
-    CLOSE_POSTMESSAGE_ACTION
+    CLOSE_POSTMESSAGE_ACTION,
+    CLOSE_SURVEY_MESSAGE_ACTION,
+    OPEN_SURVEY_MESSAGE_ACTION
 } from "./adminTypes";
 
 const getSondageData = ()=>(dispatch)=> {
@@ -88,8 +90,13 @@ const changeGroupSelection = (group)=>(dispatch)=>{
 
 const changeGroupSondage = (sondage_id, group_id) => (dispatch) => {
     axios.post("http://localhost:4200/admin/changeNextSondage", {sondage_id: sondage_id, group_id: group_id})
-    .then((res) => {
-        console.log(res.data)
+    .then(() => {
+        dispatch({
+            type: OPEN_SURVEY_MESSAGE_ACTION,
+            payload: {
+                message: 'Selection Confirmed'
+            }
+        })
     })
 }
 
@@ -127,4 +134,14 @@ const closePostMessage = ()=>(dispatch)=>{
     })
 }
 
-export { getSondageData, getGroupData, changeSondageSelection, changeGroupSelection, changeGroupSondage, postSurvey, getKeywordList, addKeyword, closePostMessage }
+const closeSurveyMessage = ()=>(dispatch)=>{
+    dispatch({
+        type: CLOSE_SURVEY_MESSAGE_ACTION,
+        payload: {
+            closingStatue: false,
+            message: ''
+        }
+    })
+}
+
+export { getSondageData, getGroupData, changeSondageSelection, changeGroupSelection, changeGroupSondage, postSurvey, getKeywordList, addKeyword, closePostMessage, closeSurveyMessage }
