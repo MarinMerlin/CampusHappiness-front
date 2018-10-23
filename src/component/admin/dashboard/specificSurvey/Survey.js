@@ -36,6 +36,18 @@ class Survey extends React.Component {
     }
    
     render() {
+      const commentList = this.props.survey.comments
+      const thematiqueList = this.props.survey.thematiqueList
+      const nomThematiqueArray = []
+      thematiqueList.forEach(thematique=>{
+        nomThematiqueArray.push(thematique.name)
+      })
+      const comments = []
+      commentList.forEach(comment=>{
+        if (nomThematiqueArray.includes(comment.thematique.name)) {
+          comments.push(comment)
+        }
+      })
       return (
       <Grid container direction='column' justify='flex-start' alignItems='center' style={{backgroundColor:'#2c3e50'}} >
         <Grid item >
@@ -58,7 +70,7 @@ class Survey extends React.Component {
           <div>
             {this.props.survey.thematiqueList ? 
               <GridList spacing={20} cellHeight={'auto'} cols={3} style={{marginTop:'10vh'}} >
-              {this.props.survey.thematiqueList.map(thematiqueData => (
+              {thematiqueList.map(thematiqueData => (
                 <GridListTile key={thematiqueData.name}>
                   <ThematiqueDisplayer thematique={thematiqueData}/>
                 </GridListTile>
@@ -71,7 +83,7 @@ class Survey extends React.Component {
           </div>
           }
           {!this.props.survey.loaded && <h1>Chargement</h1>}  
-          {this.props.survey.loaded &&  <CommentsDisplayer comments={this.props.survey.comments} />}
+          {this.props.survey.loaded &&  <CommentsDisplayer comments={comments} />}
         </Grid>
       </Grid>
     )}
