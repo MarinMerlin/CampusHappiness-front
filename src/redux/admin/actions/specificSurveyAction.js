@@ -24,6 +24,7 @@ const handleDateChange = (moment, group_id)=>(dispatch)=> {
                 type: GET_SPECIFIC_SURVEY_ACTION,
                 payload: {
                     thematiqueList: res.data.thematiqueList,
+                    sondage_name: res.data.name,
                     loaded2: true,
                     comments: comments,
                     loaded: loaded,

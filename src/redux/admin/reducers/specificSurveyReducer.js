@@ -6,6 +6,7 @@ const specificSurveyReducer = function(state = null, {type, payload}){
             return {
                 ...state,
                 thematiqueList: payload.thematiqueList,
+                sondage_name: payload.sondage_name,
                 loaded2: payload.loaded2,
                 comments: payload.comments,
                 loaded: payload.loaded,

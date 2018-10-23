@@ -44,6 +44,7 @@ const initialState = {
         loaded: false,
         comments: [],
         thematiqueList: [],
+        sondage_name: null,
         loaded2: false,
     },
     manageSurvey: {

@@ -67,7 +67,10 @@ class Survey extends React.Component {
         <Grid item style={{width:'97%'}} >
           {!this.props.survey.loaded && <h1>Loading</h1>}  
           {this.props.survey.loaded &&  
-          <div>
+          <div style={{justifyContent: 'center'}}>
+            <Typography style={{color:'white', fontFamily: 'Roboto', fontWeight:200, fontSize:'3em', textAlign: 'center', marginTop:'8vh'}}>
+              Survey : {this.props.survey.sondage_name}
+            </Typography>
             {this.props.survey.thematiqueList ? 
               <GridList spacing={20} cellHeight={'auto'} cols={3} style={{marginTop:'10vh'}} >
               {thematiqueList.map(thematiqueData => (
