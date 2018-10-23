@@ -22,7 +22,7 @@ const postUsers  = (userList)=>(dispatch)=>{
 
 const postGroup  = (groupName)=>(dispatch)=>{
     axios.post("http://localhost:4200/admin/postGroup", {groupName: groupName}).then(res=>{
-        if (res.data.data.success) {
+        if (res.data.success) {
             dispatch({
                 type: POST_GROUP_ACTION,
                 payload: {
