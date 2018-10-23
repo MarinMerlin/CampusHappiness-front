@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, CircularProgress} from '@material-ui/core';
 
 // Fonction pour mettre un effet de chargement :
-function Loading(props) {
+function Loading() {
     return( 
       <div style={{position: 'relative'}}>
     <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
