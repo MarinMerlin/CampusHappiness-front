@@ -14,7 +14,6 @@ class RedirectToUser extends Component {
     }
 
     handleClick = () => {
-        console.log("Boutton pageUitilisateur hadnel click");
         this.props.switchPage(0, this.setState({ redirect: true }));
         
 

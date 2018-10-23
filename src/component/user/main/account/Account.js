@@ -63,11 +63,12 @@ export class Account extends Component {
 
   render() {
     const { classes } = this.props;
-    
-    if (this.props.user.photoToRetrieve) {
-      this.setState({ image: env.serverUrl + this.props.user.photo });
-      this.forceUpdate();
-      this.props.photoRetrieved();
+    if (this.props.user) {
+      if (this.props.user.photoToRetrieve) {
+        this.setState({ image: env.serverUrl + this.props.user.photo });
+        this.forceUpdate();
+        this.props.photoRetrieved();
+      }
     }
     return (
       <div>

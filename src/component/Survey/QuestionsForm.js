@@ -63,7 +63,7 @@ function AnswerButtons(props) {
                     type="submit"
                     disabled={props.alreadyAnswered}
                 >
-                    Soumettre
+                    Submit
                 </Button>
             </Grid>
             <Grid item>
@@ -73,7 +73,7 @@ function AnswerButtons(props) {
                     disabled={!props.alreadyAnswered}
                     onClick={props.handleChange({ type: 'modify' })}
                 >
-                    Modifier
+                    Modify
                 </Button>
             </Grid>
         </Grid>
@@ -123,7 +123,7 @@ function CommentArea(props) {
     let comment = props.comments.get(props.theme.id);
     return (
         <TextField
-            label={`Commentaire pour la thématique ${props.theme.name}`}
+            label={`comment for ${props.theme.name}`}
             disabled={props.alreadyAnswered}
             variant="outlined"
             fullWidth

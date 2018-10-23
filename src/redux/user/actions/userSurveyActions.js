@@ -31,7 +31,7 @@ const getSurvey = (token) => (dispatch) => {
             type: SHOW_ERROR,
             payload: { 
                 error: true,
-                errorMessage: "Le serveur a rencontré une erreur au cours du chargement du sondage",
+                errorMessage: "The server has encountered a problem while retrieving the survey",
             }
         })
         
@@ -58,7 +58,7 @@ const getToken = (next = () => {}) => (dispatch) => {
             type: SHOW_ERROR,
             payload: {
                 error: true,
-                errorMessage: "Le serveur a rencontré un problème au cours de la création du token utilisateur",
+                errorMessage: "The server as encountered some troubles while creating the token",
             }
         });
     });
@@ -76,7 +76,7 @@ const readUrlToken = (urlArg, next = () => {}) => (dispatch) => {
             type: SHOW_ERROR,
             payload: {
                 error: true,
-                errorMessage: "Impossible de lire l'url",
+                errorMessage: "Impossible to read the url",
             }
         });
     }
@@ -87,7 +87,7 @@ const readUrlToken = (urlArg, next = () => {}) => (dispatch) => {
             type: SHOW_ERROR,
             payload: {
                 error: true,
-                errorMessage: "Votre Lien est incorrect ! Veuillez utiliser le lien que vous avez reçu par mail !",
+                errorMessage: "The link in not correct, you should use the one sent by email",
             }
         });
     }
@@ -105,7 +105,7 @@ const readUrlToken = (urlArg, next = () => {}) => (dispatch) => {
             type: SHOW_ERROR,
             payload: {
                 error: true,
-                errorMessage: "le token de l'url est incorrect ",
+                errorMessage: "url token invalid",
             }
         });
     } 
@@ -140,7 +140,7 @@ const getMailIntensity = (token, next = () => {} ) => (dispatch) => {
 
 export { getMailIntensity };
 
-const postMailIntensity = (inputMailIntensity, token, user_id, next = () => {} ) => () => (dispatch) => {
+const postMailIntensity = (inputMailIntensity, token, user_id, next = () => {} ) => () => () => {
     var body = { newIntensity: inputMailIntensity, user_id: user_id };
     axios.post(serverUrl+'/survey/changeFreq', body, {headers:{Authorization: "bearer "+ token}})
     .then( (res) => {
@@ -148,7 +148,7 @@ const postMailIntensity = (inputMailIntensity, token, user_id, next = () => {} )
     })
     .catch( (error) => {
         console.warn("Impossible de poster la fréquence mail, error :", error.message);
-        next("Impossible d'envoyer la fréquence mail au serveur");
+        next("Impossible to send the new mail intensity to the server");
     });
 }
 
@@ -205,12 +205,12 @@ const handleChange  = (params, next = () => {} ) => (dispatch, getState) => (eve
                     })
                     .catch( (error) => {
                         console.warn("Impossible de soumettre le sondage au serveur, error : ", error.message);
-                        next("Impossible de soumettre le sondage au serveur");
+                        next("Failed to send the survey to the server");
                     });
                 }
                 
                 else {
-                    next("Vous devez répondre à toute les questions ! (pas nécessairement les commentaires)");
+                    next("You have to answer all questions (not necessary the comments)");
                 }
                 
                 
@@ -282,6 +282,7 @@ function allQuestionsAnswered(thematiqueList, answers){
  * pour l'affichage
  * 
  * @param {*} data 
+ *
  */
 function makeAnswerMap(data) {
 
