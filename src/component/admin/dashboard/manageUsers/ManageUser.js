@@ -107,7 +107,7 @@ class ManageUser extends Component {
   }
 
   singlePost = ()=>{
-    if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(this.state.singleUser.email) || /^[a-zA-Z0-9]+\.[A-Za-z]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(this.state.singleUser.email)) { 
+    if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(this.state.singleUser.email) || /^[a-zA-Z0-9]+\.[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(this.state.singleUser.email)) { 
       this.props.postUsers([this.state.singleUser])
     } else {
       this.setState({incorrectEmailAlert: true})
