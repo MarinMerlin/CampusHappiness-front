@@ -29,6 +29,7 @@ function monthSatisfaction(dataList, name){
 const getUserStat = () => (dispatch) => {
     axios.get('http://localhost:4200/user/userStat')
     .then(res => {
+        console.log(res.data);
         const dataList = [];
         const themList = [];
         res.data.forEach(thematique => {

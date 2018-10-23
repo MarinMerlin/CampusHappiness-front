@@ -92,6 +92,7 @@ class UserMain extends Component {
 
     onRedirectAdmin = () => {
         this.setState({redirectAdmin: true});
+        this.props.onToggleDrawer(false);
     }
 
   render() {
