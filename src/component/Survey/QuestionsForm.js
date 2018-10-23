@@ -90,7 +90,7 @@ function Thematiques(props) {
             <ul style= {{ padding: 0 }}>
                 {
                     props.thematiqueList.map(theme => (
-                        <Grid item style={{ margin: '2VW', marginBottom: '3VH', }} key={"Grid" + theme.id}>
+                        <Grid item style={{ margin: '2VW', marginBottom: '10VH', }} key={"Grid" + theme.id}>
                             <Paper style={{ padding: '1VW' , backgroundColor: '#ecf0f1' }} elevation={2} key={"Paper" + theme.id}>
                                 <h1 style={{ alignContent: 'center' }}> {theme.name} </h1>
                                 <QuestionArea
