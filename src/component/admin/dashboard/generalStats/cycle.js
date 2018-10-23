@@ -31,19 +31,19 @@ const cycleMonth =function(){
 
 const input1 = {
     xLabel: cycleWeek(),
-    elementLabel: 'mail envoyé',
+    elementLabel: 'mail sent',
     boxColor: '#2980b9',
 }
 
 const input2 = {
     xLabel: cycleWeek(),
-    elementLabel: 'sondage remplis',
+    elementLabel: 'survey answered',
     boxColor: '#3498db'
 }
 
 const input3 = {
     xLabel: cycleWeek(),
-    elementLabel: 'mail sent/sondage answered',
+    elementLabel: 'mail sent/survey answered',
     backgroundColor: '#e74c3c',
     boxColor: '#f39c12'
 }

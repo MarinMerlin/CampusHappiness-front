@@ -22,9 +22,9 @@ if (Link && Element && Events && scrollSpy && scroller) {
 
 const titleStyle = { fontFamily: 'Roboto', fontSize: '2.5em', color: '#2c3e50', fontWeight: 100, textAlign:'center'}
 const messageMissingSurveyName = "missing the survey name"
-const messageNoThematique = "a survey must have at least one thematique"
-const messageThematiqueWithoutQuestion = "a thematique has no question"
-const messageMissingThematiqueName = "missing a thematique name"
+const messageNoThematique = "a survey must have at least one topic"
+const messageThematiqueWithoutQuestion = "a topic has no question"
+const messageMissingThematiqueName = "missing a topic name"
 const messageMissingQuestionText = "missing a question text"
 const messageMissingQuestionKeyWord = "missing a question key word"
 
@@ -202,28 +202,6 @@ class SurveyAdder extends Component {
                         </Button>
                     </Grid>
                 </Grid>
-                <Snackbar
-            anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-            }}
-            open={this.props.openPostMessage}
-            onClose={this.props.closePostMessage}
-            ContentProps={{
-                'aria-describedby': 'message-id',
-            }}
-            message={<span id="sucess">Survey Added</span>}
-            action={[
-            <IconButton
-            key="close"
-            aria-label="Close"
-            color="inherit"
-            onClick={this.props.closePostMessage}
-            >
-            <CloseIcon />
-            </IconButton>,
-            ]}
-            />
             </Paper>
             <Snackbar
                     open={this.state.showSnackbar}

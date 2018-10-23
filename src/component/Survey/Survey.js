@@ -70,7 +70,7 @@ class Survey extends React.Component {
                                     </Grid>
                                 </Grid>
                                 
-                <h1 style={{color: 'white', fontFamily: 'Roboto', textAlign: 'center'}}> Sondage {this.props.sondageName} </h1>
+                <h1 style={{color: 'white', fontFamily: 'Roboto', textAlign: 'center'}}> Survey : {this.props.sondageName} </h1>
                             </Grid>
                             <Grid item>
 

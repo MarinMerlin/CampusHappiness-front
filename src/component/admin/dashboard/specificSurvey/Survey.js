@@ -65,7 +65,7 @@ class Survey extends React.Component {
           </Paper>
         </Grid>
         <Grid item style={{width:'97%'}} >
-          {!this.props.survey.loaded && <h1>Chargement</h1>}  
+          {!this.props.survey.loaded && <h1>Loading</h1>}  
           {this.props.survey.loaded &&  
           <div>
             {this.props.survey.thematiqueList ? 
@@ -82,7 +82,7 @@ class Survey extends React.Component {
             }
           </div>
           }
-          {!this.props.survey.loaded && <h1>Chargement</h1>}  
+          {!this.props.survey.loaded && <h1>Loading</h1>}  
           {this.props.survey.loaded &&  <CommentsDisplayer comments={comments} />}
         </Grid>
       </Grid>

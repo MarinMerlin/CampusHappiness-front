@@ -17,7 +17,7 @@ class SurveyManager extends Component {
     render(){
         return(
             <div style={firstDivStyle} >
-                {!(this.props.loadedSondage && this.props.loadedGroup) && <h1>Chargement</h1>}  
+                {!(this.props.loadedSondage && this.props.loadedGroup) && <h1>Loading</h1>}  
                 {(this.props.loadedSondage && this.props.loadedGroup) && <SurveySelector currentSondage={this.props.currentSondage} sondageList={this.props.sondageList} />}
                 <SurveyAdder/>
             </div>

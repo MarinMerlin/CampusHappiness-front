@@ -20,7 +20,7 @@ const UserTable = ({page, handleChangePage, userArray, rowsPerPage, handleChange
                     <TableCell>First Name</TableCell>
                     <TableCell>Last Name</TableCell>
                     <TableCell>Email</TableCell>
-                    <TableCell>Pseudo</TableCell>
+                    <TableCell>Username</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>

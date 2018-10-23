@@ -52,7 +52,7 @@ class Login extends Component {
                   zIndex:1,
                 }}>
                   <Grid item >
-                    <CustomInput placeHolder='Pseudo' keyPress={this.handleKeyPress} />
+                    <CustomInput placeHolder='Username' keyPress={this.handleKeyPress} />
                   </Grid>
                   <Grid item >
                     <CustomInput placeHolder='Password' keyPress={this.handleKeyPress} />

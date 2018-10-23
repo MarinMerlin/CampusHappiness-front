@@ -16,7 +16,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        {this.state.posts ? <PostDisplayer postList={this.state.posts}/>:<p>Chargement...</p>}
+        {this.state.posts ? <PostDisplayer postList={this.state.posts}/>:<p>Loading...</p>}
       </div>
     )
   }
