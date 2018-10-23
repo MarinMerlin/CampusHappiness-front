@@ -6,6 +6,7 @@ import {
     UPDATE_EMAIL_ACTION,
     UPDATE_PASSWORD_ACTION,
     UPDATE_USER_PHOTO_ACTION,
+    PHOTO_RETRIEVED,
 } from '../actions/userTypes';
 
 const userAccountReducer = function(state = null, {type, payload}){
@@ -61,6 +62,15 @@ const userAccountReducer = function(state = null, {type, payload}){
                 connectedUser:{
                     ...state.connectedUser,
                     photo: payload.photo,
+                    photoToRetrieve: true,
+                }
+            }
+        case PHOTO_RETRIEVED:
+            return {
+                ...state,
+                connectedUser:{
+                    ...state.connectedUser,
+                    photoToRetrieve: false,
                 }
             }
         default:

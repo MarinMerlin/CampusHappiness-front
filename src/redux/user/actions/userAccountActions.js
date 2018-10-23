@@ -10,7 +10,9 @@ import {
     GET_ACCOUNT_ACTION,
     GET_USER_ACTION,
     UPDATE_USER_PHOTO_ACTION,
+    PHOTO_RETRIEVED,
 } from "./userTypes";
+import { Component } from 'react';
 
 export function updateAccount(data) {
     console.log(data.name);
@@ -62,7 +64,7 @@ const updatePhoto = (updatedPhoto) => (dispatch) => {
             dispatch({
                 type: UPDATE_USER_PHOTO_ACTION,
                 payload: {
-                    photo: res.data.photo
+                    photo: res.data.photo,
                 }
             });
             console.log("updated photo")
@@ -70,7 +72,13 @@ const updatePhoto = (updatedPhoto) => (dispatch) => {
             console.log("error updating photo");
         }
     })
-}
+};
+
+const photoRetrieved = () => {
+    return({
+        type: PHOTO_RETRIEVED,
+    });
+};
 const sendUpdate = (updatedUser) => (dispatch) => {
     axios.post('http://localhost:4200/user/updateUser', {updatedUser: updatedUser})
     .then( res => {
@@ -93,5 +101,5 @@ const sendUpdate = (updatedUser) => (dispatch) => {
     })
 }
 
-export { updatePhoto, sendUpdate };
+export { updatePhoto, sendUpdate, photoRetrieved };
 
