@@ -73,9 +73,9 @@ class Survey extends React.Component {
             </Typography>
             {this.props.survey.thematiqueList ? 
               <GridList spacing={20} cellHeight={'auto'} cols={3} style={{marginTop:'10vh'}} >
-              {thematiqueList.map(thematiqueData => (
+              {thematiqueList.map((thematiqueData, colorIndex) => (
                 <GridListTile key={thematiqueData.name}>
-                  <ThematiqueDisplayer thematique={thematiqueData}/>
+                  <ThematiqueDisplayer thematique={thematiqueData} colorIndex={colorIndex}/>
                 </GridListTile>
               ))}
             </GridList>

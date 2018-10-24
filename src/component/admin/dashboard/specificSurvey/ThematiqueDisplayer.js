@@ -1,9 +1,8 @@
 import React from 'react'
 import { Paper, Typography } from '@material-ui/core';
 import SoftRadar from '../chartDisplayers/SoftRadar';
-
-const ThematiqueDisplayer = ({thematique}) => {
-    console.log(thematique)
+import backgroundColorList from '../colorSet'
+const ThematiqueDisplayer = ({thematique, colorIndex}) => {
     thematique.questionList.forEach(question=>{
         question.avg = Math.round(question.avg*100)/100
     })
@@ -39,7 +38,7 @@ const ThematiqueDisplayer = ({thematique}) => {
     })
     thematique.questionList = newQuestionList
     return (
-        <Paper style={{backgroundColor: '#3498db', border:'1px solid', borderColor:'#ecf0f1'}} >
+        <Paper style={{backgroundColor: backgroundColorList[colorIndex%6], border:'1px solid', borderColor:'#ecf0f1'}} >
             <Typography style={{color:'white', fontFamily: 'Roboto', fontWeight:100, fontSize:'1.7em', textAlign: 'center', padding:'1vh'}} >
                 {thematique.name}
             </Typography>
