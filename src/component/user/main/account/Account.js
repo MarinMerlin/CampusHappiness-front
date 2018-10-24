@@ -44,6 +44,7 @@ export class Account extends Component {
 
   onSubmitChange = () => {
     this.props.submitChange(this.props.user)
+    this.setState({showSnackbar: true, snackbarMessage: "Success"})
   }
 
   updatePhoto = (event) => {
@@ -184,11 +185,11 @@ export class Account extends Component {
            </Grid>
         </Paper>
         <Snackbar
-                    open={this.state.showSnackbar}
-                    message={this.state.snackbarMessage}
-                    autoHideDuration={6000}
-                    onClose={() => { this.setState({ showSnackbar: false }); }}
-                />
+            open={this.state.showSnackbar}
+            message={this.state.snackbarMessage}
+            autoHideDuration={6000}
+            onClose={() => { this.setState({ showSnackbar: false }); }}
+        />
       </div>
     )
   }
